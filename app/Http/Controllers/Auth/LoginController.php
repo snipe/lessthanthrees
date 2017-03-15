@@ -36,4 +36,26 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider($service)
+    {
+        return Socialite::driver($service)->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback($service)
+    {
+        $user = Socialite::driver($service)->user();
+
+        // $user->token;
+    }
 }
