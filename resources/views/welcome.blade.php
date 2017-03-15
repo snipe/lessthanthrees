@@ -70,6 +70,17 @@
                 <div class="top-right links">
                     @if (Auth::check())
                         <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/logout') }}"
+                           onclick="event.preventDefault();
+         document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        <form id="logout-form"
+                              action="{{ url('/logout') }}"
+                              method="POST"
+                              style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     @else
                         <a href="{{ url('/login') }}">Login</a>
                         <a href="{{ url('/register') }}">Register</a>
@@ -79,16 +90,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    LessThanThrees
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+
             </div>
         </div>
     </body>
