@@ -1,0 +1,21 @@
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "../../../node_modules/bootstrap-less/bootstrap/bootstrap";
+
+.user-image {
+  float: left;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: -2px;
+  @media (max-width: @screen-xs-max) {
+    float: none;
+    margin-right: 0;
+    margin-top: -8px;
+    line-height: 10px;
+  }
+}
