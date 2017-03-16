@@ -80,8 +80,9 @@
     <div class="container" id="maincontent" tabindex="-1">
         <div class="row">
             <div class="col-lg-12">
-                @if ((isset($selected_account)) && (Auth::check()))
-                    <img class="img-responsive round-image" src="{{ Auth::user() ->gravatar() }}" alt="">
+
+                @if (isset($selected_account))
+                    <img class="img-responsive round-image" src="{{ $selected_account->gravatar() }}" alt="">
                 @else
                     <img class="img-responsive round-image" src="{{ url('/') }}/img/lessthanthree-sm.png" alt="">
                 @endif
