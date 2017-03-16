@@ -8025,7 +8025,12 @@ div#maincontent {
 }
 .navbar-default .navbar-nav .open .dropdown-menu > li > a,
 .navbar-default .navbar-nav .open .dropdown-menu {
-  background-color: white;
+  color: #18BC9C;
+}
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  background-color: #2C3E50;
   color: #18BC9C;
 }
 .user-image {

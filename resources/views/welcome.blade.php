@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     @if (Auth::check())
-                    <a href="{{ route('home')  }}" class="btn btn-success btn-lg">
+                    <a href="{{ config('app.url') }}/home" class="btn btn-success btn-lg">
                         Add Items
                     </a>
                     <a href="{{ Auth::user()->getProfileUrl()  }}" class="btn btn-success btn-lg">

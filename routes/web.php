@@ -46,12 +46,10 @@ Route::get('/privacy', function () {
     return view('welcome');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 
 Auth::routes();
 
+Route::get('/', [ 'as' => 'home', 'uses' => 'HomeController@index' ]);
 Route::get('/home', [ 'as' => 'home', 'uses' => 'HomeController@index' ]);
