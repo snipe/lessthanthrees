@@ -149,7 +149,7 @@
                 <div class="col-lg-12">
 
                      <a target="_blank" href="https://lessthanthrees.com">LessThanThrees</a> is an <a href="https://github.com/snipe/lessthanthrees">open source
-                        project</a>. Made with <i class="fa fa-heart heart"></i> by <a href="https://twitter.com/snipeyhead">@snipeyhead</a>.
+                        project</a>. Made with <i class="glyphicon glyphicon-heart heart"></i> by <a href="https://twitter.com/snipeyhead">@snipeyhead</a>.
                 </div>
             </div>
         </div>
