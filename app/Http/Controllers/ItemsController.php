@@ -37,6 +37,7 @@ class ItemsController extends Controller
     public function storeItem(Request $request) {
         $data = new Item();
         $data->name = $request->name;
+        $data->description = $request->description;
         $data->category_id = $request->category_id;
         $data->user_id = Auth::user()->id;
         $data->save();
