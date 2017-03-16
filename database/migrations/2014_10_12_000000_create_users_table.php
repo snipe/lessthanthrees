@@ -16,11 +16,9 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('username')->unique();
+            $table->string('username')->nullable()->default(null);
             $table->string('email')->nullable()->default(null);
-            $table->string('password');
-            $table->string('provider');
-            $table->string('provider_id')->unique();
+            $table->string('password')->nullable()->default(null);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -34,15 +32,15 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('service');
-            $table->string('uid')->nullable()->default(NULL);
+            $table->string('uid')->nullable()->default(null);
             $table->timestamps();
-            $table->string('access_token')->default(NULL)->nullable()->default(NULL);
-            $table->integer('end_of_life')->default(NULL)->nullable()->default(NULL);
-            $table->string('refresh_token')->default(NULL)->nullable()->default(NULL);
-            $table->string('request_token')->default(NULL)->nullable()->default(NULL);
-            $table->string('request_token_secret')->default(NULL)->nullable()->default(NULL);
-            $table->text('extra_params')->default(NULL)->nullable()->default(NULL);
-            $table->string('access_token_secret')->default(NULL)->nullable()->default(NULL);
+            $table->string('access_token')->nullable()->default(null);
+            $table->integer('end_of_life')->nullable()->default(null);
+            $table->string('refresh_token')->nullable()->default(null);
+            $table->string('request_token')->nullable()->default(null);
+            $table->string('request_token_secret')->nullable()->default(null);
+            $table->text('extra_params')->nullable()->default(null);
+            $table->string('access_token_secret')->nullable()->default(null);
         });
     }
 

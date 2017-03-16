@@ -57,15 +57,19 @@ class User extends Authenticatable
      */
     public static function saveSocialAccount($socialUser, $provider)
     {
+       // dd($socialUser);
+
         // Check to see if a user exists in the users table first
         $user =  User::where('email', '=', $socialUser->getEmail())->first();
+        
+
 
         // There is NOT a matching email address in the user table
         if (!$user) {
             $user = new User;
             $user->email = $socialUser->getEmail();
-            $user->first_name = $socialUser->getName();
-            $user->display_name = $socialUser->getName();
+            $user->name = $socialUser->getName();
+            $user->username = $socialUser->getNickname();
             if (!$user->save()) {
                 return false;
             }

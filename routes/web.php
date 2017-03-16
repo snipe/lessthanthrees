@@ -14,7 +14,7 @@
 
 
 
-Route::get('/home', 'HomeController@index');
+
 Route::get ( '/vueitems', 'HomeController@readItems' );
 Route::post ( '/vueitems', 'HomeController@storeItem' );
 Route::post ( '/vueitems/{id}', 'HomeController@deleteItem' );
@@ -42,4 +42,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', [ 'as' => 'home', 'uses' => 'HomeController@index' ]);
