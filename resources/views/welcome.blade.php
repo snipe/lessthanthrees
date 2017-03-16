@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-lg-4">
                     <p>
-                        Look for an API coming soon, automatic linking and thumbnails, and more flexibility in list creation and sorting!
+                        Look for an API coming soon, automatic linking and thumbnails, more sub-categories/genres, and more flexibility in list creation and sorting!
                     </p>
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 text-center">

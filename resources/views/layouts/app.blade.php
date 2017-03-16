@@ -128,7 +128,11 @@
         </div>
     </div>
 </header>
-
+<div  id="notifications" class="container">
+    <div class="row">
+        @include('notifications')
+    </div>
+</div>
     <div id="app">
         @yield('content')
     </div>
