@@ -26,7 +26,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('user_likes', function ($table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('fave_id')->nullable()->default(null);
+            $table->integer('item_id')->nullable()->default(null);
             $table->timestamps();
         });
     }
