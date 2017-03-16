@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'password', 'provider', 'provider_id'
+        'name', 'username', 'email', 'password', 'provider', 'provider_id'
     ];
 
     /**
@@ -97,6 +97,6 @@ class User extends Authenticatable
         return DB::table('social')
             ->where('access_token', '=', $user->token)
             ->where('service', '=', $provider)
-            ->get();
+            ->first();
     }
 }
