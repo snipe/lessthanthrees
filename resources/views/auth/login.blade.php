@@ -126,6 +126,21 @@
 
                                 <form id="register-form" action="{{ route('register') }}" method="post" role="form" style="display: none;">
                                     {{ csrf_field() }}
+                                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                        <div class="row">
+                                            <label for="name" class="col-md-3  col-md-offset-1 control-label">Name</label>
+
+                                            <div class="col-md-7">
+                                                <input id="name" type="text" class="form-control" name="name" required>
+                                                @if ($errors->has('name'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('name') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                                         <div class="row">
                                             <label for="username" class="col-md-3  col-md-offset-1 control-label">Username</label>
