@@ -3,14 +3,44 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-9 col-md-offset-2">
+
+            <div class="col-md-3">
+                <a class="btn btn-block btn-social btn-twitter" href="{{ route('oauth', ['provider'=> 'twitter']) }}">
+                    <span class="fa fa-twitter"></span> Twitter
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a class="btn btn-block btn-social btn-facebook" href="{{ route('oauth', ['provider'=> 'facebook']) }}">
+                    <span class="fa fa-facebook"></span> Facebok
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a class="btn btn-block btn-social btn-google" href="{{ route('oauth', ['provider'=> 'google']) }}">
+                    <span class="fa fa-google"></span> Google
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a class="btn btn-block btn-social btn-github" href="{{ route('oauth', ['provider'=> 'github']) }}">
+                    <span class="fa fa-github"></span> Github
+                </a>
+            </div>
+
+        </div>
+        <div class="col-md-9 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
+
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
