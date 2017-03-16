@@ -17,6 +17,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
 
 mix.styles(
     [
-    'public/css/app.css',
-    'public/css/overrides.css'
+        'public/css/app.css',
+        'public/css/overrides.css'
     ], 'public/css/all.css');
