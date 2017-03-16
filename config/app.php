@@ -16,6 +16,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Domain Name
+    |--------------------------------------------------------------------------
+    |
+    | The top level TLD this site site on. This is used to parse the username
+    | in the subdomain profiles.
+    */
+
+    'domain' => env('APP_DOMAIN', 'lessthanthrees.com'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
@@ -168,6 +179,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -177,6 +189,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
 
     ],
 
@@ -204,6 +217,7 @@ return [
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
         'DB' => Illuminate\Support\Facades\DB::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
