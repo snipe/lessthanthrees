@@ -38,12 +38,14 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
-                @foreach (\App\Category::all() as $category)
-                <li><a href="{{ url('/') }}/{{ strtolower($category->name) }}">{{ $category->name }}</a></li>
-                @endforeach
+                @if (isset($selected_account))
+                    @foreach (\App\Category::all() as $category)
+                    <li><a href="{{ url('/') }}/{{ $category->slug }}"><i class="{{ $category->icon }}"></i> {{ $category->name }}</a></li>
+                    @endforeach
+                @endif
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ route('login') }}">Login / Register</a></li>
+                    <li><a href="{{ config('app.url') }}/login">Login / Register</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -79,9 +81,33 @@
             <div class="col-lg-12">
                 <img class="img-responsive img-small" src="{{ url('/') }}/img/lessthanthree-sm.png" alt="">
                 <div class="intro-text">
-                    <h1 class="name">{{ config('app.name') }}</h1>
+                    <h1 class="name">
+                        @if (isset($selected_account))
+                            {{ $selected_account->name }}
+                        @endif
+                            {{ config('app.name') }}</h1>
                     <hr class="star-light">
-                    <span class="skills">Your shareable library of stuff you love</span>
+                    <span class="skills">
+
+                        @if (isset($selected_account))
+                            {{ $selected_account->name }}'s library of
+                        @else
+                            Your shareable library of
+                        @endif
+
+                        @if (isset($category))
+                                {{ $category->name }}
+                        @else
+                            stuff
+                        @endif
+
+                        @if (isset($selected_account))
+                            you'll love
+                        @else
+                            you love
+                        @endif
+
+                        </span>
                 </div>
             </div>
         </div>
