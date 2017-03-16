@@ -39,8 +39,8 @@
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 @if (isset($selected_account))
-                    @foreach (\App\Category::all() as $category)
-                    <li><a href="{{ url('/') }}/{{ $category->slug }}"><i class="{{ $category->icon }}"></i> {{ $category->name }}</a></li>
+                    @foreach (\App\Category::all() as $menu_category)
+                    <li><a href="{{ url('/') }}/{{ $menu_category->slug }}"><i class="{{ $menu_category->icon }}"></i> {{ $menu_category->name }}</a></li>
                     @endforeach
                 @endif
                 <!-- Authentication Links -->
@@ -80,7 +80,7 @@
     <div class="container" id="maincontent" tabindex="-1">
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-responsive img-small" src="{{ url('/') }}/img/lessthanthree-sm.png" alt="">
+                <img class="img-responsive round-image" src="{{ url('/') }}/img/lessthanthree-sm.png" alt="">
                 <div class="intro-text">
                     <h1 class="name">
                         @if (isset($selected_account))
@@ -97,7 +97,7 @@
                         @endif
 
                         @if (isset($category))
-                                {{ $category->name }}
+                                <strong>{{ $category->name }}</strong>
                         @else
                             stuff
                         @endif

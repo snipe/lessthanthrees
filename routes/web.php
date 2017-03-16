@@ -18,6 +18,7 @@ Route::group([
     'domain' => '{subdomain}.'.config('app.domain'),
     'middleware' => \App\Http\Middleware\Subdomain::class], function () {
 
+    Route::get('/home', array('as' => 'user.home', 'uses' => 'ItemsController@showUserHome'));
     Route::get('/{category}', array('as' => 'user.home', 'uses' => 'ItemsController@showUserItems'));
     Route::get('/', array('as' => 'user.home', 'uses' => 'ItemsController@showUserHome'));
 

@@ -21,8 +21,8 @@
                         </div>
                         <div class="col-md-2">
                             <select name="category_id" class="form-control" v-model="newItem.category_id">
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @foreach ($categories as $menu_category)
+                                    <option value="{{ $menu_category->id }}">{{ $menu_category->name }}</option>
                                 @endforeach
                             </select>
 
