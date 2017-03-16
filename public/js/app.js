@@ -11182,7 +11182,7 @@ module.exports = g;
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
+/* WEBPACK VAR INJECTION */(function($) {
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -11210,7 +11210,7 @@ var app = new Vue({
         items: [],
         hasError: true,
         hasDeleted: true,
-        newItem: { 'name': '' }
+        newItem: { 'name': '', 'category_id': '1', 'description': '' }
     },
     mounted: function mounted() {
         this.getVueItems();
@@ -11227,6 +11227,9 @@ var app = new Vue({
             var _this2 = this;
 
             var input = this.newItem;
+
+            console.dir(input);
+
             if (input['name'] == '') {
                 this.hasError = false;
                 this.hasDeleted = true;
@@ -11249,6 +11252,25 @@ var app = new Vue({
         }
     }
 });
+
+$(function () {
+
+    $('#login-form-link').click(function (e) {
+        $("#login-form").delay(100).fadeIn(100);
+        $("#register-form").fadeOut(100);
+        $('#register-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('#register-form-link').click(function (e) {
+        $("#register-form").delay(100).fadeIn(100);
+        $("#login-form").fadeOut(100);
+        $('#login-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
 /* 11 */
