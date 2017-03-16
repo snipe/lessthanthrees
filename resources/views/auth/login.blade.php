@@ -5,29 +5,37 @@
     <div class="row">
         <div class="col-md-9 col-md-offset-2">
 
+            @if (config('services.twitter.client_id'))
             <div class="col-md-3">
                 <a class="btn btn-block btn-social btn-twitter" href="{{ route('oauth', ['provider'=> 'twitter']) }}">
                     <span class="fa fa-twitter"></span> Twitter
                 </a>
             </div>
+            @endif
 
-            <div class="col-md-3">
+            @if (config('services.facebook.client_id'))
+                <div class="col-md-3">
                 <a class="btn btn-block btn-social btn-facebook" href="{{ route('oauth', ['provider'=> 'facebook']) }}">
                     <span class="fa fa-facebook"></span> Facebok
                 </a>
             </div>
+            @endif
 
+            @if (config('services.google.client_id'))
             <div class="col-md-3">
                 <a class="btn btn-block btn-social btn-google" href="{{ route('oauth', ['provider'=> 'google']) }}">
                     <span class="fa fa-google"></span> Google
                 </a>
             </div>
+            @endif
 
+            @if (config('services.github.client_id'))
             <div class="col-md-3">
                 <a class="btn btn-block btn-social btn-github" href="{{ route('oauth', ['provider'=> 'github']) }}">
                     <span class="fa fa-github"></span> Github
                 </a>
             </div>
+            @endif
 
         </div>
         <div class="col-md-9 col-md-offset-2">
