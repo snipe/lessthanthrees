@@ -4,9 +4,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Reset Password
+                        </div>
+
+                    </div>
+                    <hr>
+                </div>
                 <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -32,13 +42,15 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="form-control btn btn-register">
                                     Send Password Reset Link
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
+                    </div>
+                </div></div>
             </div>
         </div>
     </div>
