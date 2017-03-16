@@ -10,8 +10,8 @@
                     <table class="table table-borderless" id="table">
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Notes</th>
+                            <th class="col-md-4">Name</th>
+                            <th class="col-md-8">Notes</th>
                         </tr>
                         </thead>
                         @foreach ($items as $item)
