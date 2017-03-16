@@ -12,12 +12,16 @@
 */
 
 
+Route::group(['domain' => '{account}.'.config('app.domain')], function () {
+    Route::get('/', function ($account) {
+        dd($account);
+    });
+});
 
 
-
-Route::get ( '/vueitems', 'HomeController@readItems' );
-Route::post ( '/vueitems', 'HomeController@storeItem' );
-Route::post ( '/vueitems/{id}', 'HomeController@deleteItem' );
+Route::get ( '/vueitems', 'ItemsController@readItems' );
+Route::post ( '/vueitems', 'ItemsController@storeItem' );
+Route::post ( '/vueitems/{id}', 'ItemsController@deleteItem' );
 
 Route::get('auth/{provider}', [ 'as' => 'oauth', 'uses' => 'Auth\LoginController@redirectToProvider' ]);
 Route::get('auth/{provider}/callback', [ 'as' => 'oauth.callback', 'uses' => 'Auth\LoginController@handleProviderCallback' ]);
