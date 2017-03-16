@@ -26,8 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('home')->with('categories', $categories);
+        if (Auth::check()) {
+            $categories = Category::all();
+            return view('home')->with('categories', $categories);
+        }
+        return view('welcome');
+
     }
 
 }
