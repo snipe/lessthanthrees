@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password', 'provider', 'provider_id'
+        'name', 'username', 'email', 'password'
     ];
 
     /**
@@ -57,19 +57,20 @@ class User extends Authenticatable
      */
     public static function saveSocialAccount($socialUser, $provider)
     {
-       // dd($socialUser);
 
-        // Check to see if a user exists in the users table first
         $user =  User::where('email', '=', $socialUser->getEmail())->first();
-        
-
 
         // There is NOT a matching email address in the user table
         if (!$user) {
             $user = new User;
             $user->email = $socialUser->getEmail();
             $user->name = $socialUser->getName();
-            $user->username = $socialUser->getNickname();
+            if ($socialUser->getNickname()=='') {
+                $user->username = str_slug($socialUser->getName());
+            } else {
+                $user->username = $socialUser->getNickname();
+            }
+
             if (!$user->save()) {
                 return false;
             }
@@ -92,15 +93,18 @@ class User extends Authenticatable
      * Checks to see if a user's social info has already been saved
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param object $community
+     * @param object $socialUser
+     * @param string $provider
      * @since  [v1.0]
      * @return User
      */
-    public static function checkForSocialLoginDBRecord($user, $provider)
+    public static function checkForSocialLoginDBRecord($socialUser, $provider)
     {
-        return DB::table('social')
-            ->where('access_token', '=', $user->token)
-            ->where('service', '=', $provider)
-            ->first();
+
+        return User::whereHas('social', function ($query) use ($socialUser, $provider) {
+            $query->where('access_token', '=', $socialUser->token)
+                ->where('service', '=', $provider);
+        })->first();
+
     }
 }
