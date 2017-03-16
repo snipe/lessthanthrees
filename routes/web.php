@@ -19,18 +19,23 @@ Route::group([
     'middleware' => \App\Http\Middleware\Subdomain::class], function () {
 
     Route::get('/home', array('as' => 'user.home', 'uses' => 'ItemsController@showUserHome'));
-    Route::get('/{category}', array('as' => 'user.home', 'uses' => 'ItemsController@showUserItems'));
+    Route::post('/fave/{id}', array('as' => 'item.fave', 'uses' => 'ItemsController@faveItem'));
+    Route::post('/unfave/{id}', array('as' => 'item.unfave', 'uses' => 'ItemsController@unfaveItem'));
+    Route::get('/vueitems/{category}', array('as' => 'user.items.list', 'uses' => 'ItemsController@showUserItems'));
+    Route::get('/{category}', array('as' => 'user.items', 'uses' => 'ItemsController@showItemsPage'));
     Route::get('/', array('as' => 'user.home', 'uses' => 'ItemsController@showUserHome'));
 
 });
 
 
+Route::get('/saved', array('as' => 'user.faved', 'uses' => 'ItemsController@showUserFavesPage'));
+Route::post('/unfave/{id}', array('as' => 'item.unfave', 'uses' => 'ItemsController@unfaveItem'));
+Route::get('/vueitems/saved', 'ItemsController@showUserFaves');
+Route::get('/vueitems/{category}', array('as' => 'user.items.list', 'uses' => 'ItemsController@showUserItems'));
+Route::post('/vueitems/{id}', 'ItemsController@deleteItem' );
+Route::get('/vueitems', 'ItemsController@readItems');
+Route::post('/vueitems', 'ItemsController@storeItem' );
 
-
-
-Route::get ( '/vueitems', 'ItemsController@readItems' );
-Route::post ( '/vueitems', 'ItemsController@storeItem' );
-Route::post ( '/vueitems/{id}', 'ItemsController@deleteItem' );
 
 Route::get('auth/{provider}', [ 'as' => 'oauth', 'uses' => 'Auth\LoginController@redirectToProvider' ]);
 Route::get('auth/{provider}/callback', [ 'as' => 'oauth.callback', 'uses' => 'Auth\LoginController@handleProviderCallback' ]);
