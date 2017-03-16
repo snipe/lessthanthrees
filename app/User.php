@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Cashier\Billable;
 use DB;
+use App\Fave;
 
 class User extends Authenticatable
 {
@@ -124,5 +125,12 @@ class User extends Authenticatable
     public function gravatar($size = null)
     {
         return "https://gravatar.com/avatar/".md5(strtolower(trim($this->email)))."?d=mm&s=200";
+    }
+
+
+    /* Method for getting a list of all saved entries */
+    public function faves()
+    {
+        return $this->hasMany('\App\Fave','user_id');
     }
 }
