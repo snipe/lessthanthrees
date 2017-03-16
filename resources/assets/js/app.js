@@ -26,7 +26,7 @@ const app = new Vue({
         items: [],
         hasError: true,
         hasDeleted: true,
-        newItem : {'name':''}
+        newItem : {'name':'', 'category_id':'1', 'description': ''}
     },
     mounted : function(){
         this.getVueItems();
@@ -40,11 +40,13 @@ const app = new Vue({
         },
         createItem: function(){
             var input = this.newItem;
-            if(input['name'] == ''){
+
+            console.dir(input);
+
+            if  (input['name'] == '') {
                 this.hasError = false;
                 this.hasDeleted = true;
-            }
-            else{
+            } else {
                 this.hasError = true;
                 axios.post('/vueitems',input)
                     .then(response => {
@@ -63,3 +65,25 @@ const app = new Vue({
         },
     }
 });
+
+
+
+$(function() {
+
+    $('#login-form-link').click(function(e) {
+        $("#login-form").delay(100).fadeIn(100);
+        $("#register-form").fadeOut(100);
+        $('#register-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('#register-form-link').click(function(e) {
+        $("#register-form").delay(100).fadeIn(100);
+        $("#login-form").fadeOut(100);
+        $('#login-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+
+});
+
