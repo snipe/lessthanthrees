@@ -16,6 +16,8 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function ($table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('slug');
+            $table->string('icon');
             $table->text('description')->nullable()->default(null);
             $table->integer('parent_id')->nullable()->default(null);
             $table->timestamps();
