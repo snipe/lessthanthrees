@@ -9,3 +9,5 @@ Homestead.yaml
 .env
 /.DS_Store
 /npm-debug.log
+.DS_Store
+/public/.DS_Store
