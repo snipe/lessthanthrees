@@ -38,17 +38,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Movies</a></li>
-                <li><a href="#">Music</a></li>
-                <li><a href="#">Books</a></li>
+                @foreach (\App\Category::all() as $category)
+                <li><a href="{{ url('/') }}/{{ strtolower($category->name) }}">{{ $category->name }}s</a></li>
+                @endforeach
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                    <li><a href="{{ route('register') }}">Register</a></li>
+                    <li><a href="{{ route('login') }}">Login / Register</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <img src="img/lessthanthree-sm.png" class="user-image" alt="User Image"> {{ Auth::user()->name }} <span class="caret"></span>
+                            <img src="{{ url('/') }}/img/lessthanthree-sm.png" class="user-image" alt="User Image"> {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
@@ -78,11 +77,11 @@
     <div class="container" id="maincontent" tabindex="-1">
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-responsive img-small" src="img/lessthanthree-sm.png" alt="">
+                <img class="img-responsive img-small" src="{{ url('/') }}/img/lessthanthree-sm.png" alt="">
                 <div class="intro-text">
                     <h1 class="name">{{ config('app.name') }}</h1>
                     <hr class="star-light">
-                    <span class="skills">Your library of stuff you love</span>
+                    <span class="skills">Your shareable library of stuff you love</span>
                 </div>
             </div>
         </div>
