@@ -39,7 +39,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 @foreach (\App\Category::all() as $category)
-                <li><a href="{{ url('/') }}/{{ strtolower($category->name) }}">{{ $category->name }}s</a></li>
+                <li><a href="{{ url('/') }}/{{ strtolower($category->name) }}">{{ $category->name }}</a></li>
                 @endforeach
                 <!-- Authentication Links -->
                 @if (Auth::guest())
