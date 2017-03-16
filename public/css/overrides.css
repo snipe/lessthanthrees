@@ -477,6 +477,10 @@ div#maincontent {
   color: #a94442;
   font-size: 12px;
 }
+.heart-grey {
+  color: grey;
+  font-size: 20px;
+}
 .navbar-default .navbar-nav .open .dropdown-menu > li > a,
 .navbar-default .navbar-nav .open .dropdown-menu {
   color: #18BC9C;
@@ -605,4 +609,13 @@ div#maincontent {
   color: #fff;
   background-color: #18BC9C;
   border-color: #18BC9C;
+}
+a#fav {
+  color: grey;
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+a#fav.active {
+  color: red;
 }
