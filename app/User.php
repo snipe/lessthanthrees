@@ -107,4 +107,9 @@ class User extends Authenticatable
         })->first();
 
     }
+
+
+    public function getProfileUrl() {
+        return 'https://'.$this->username.'.'.config('app.domain');
+    }
 }

@@ -111,7 +111,7 @@
                         </span>
 
                     @if (!isset($selected_account))
-                        <br><a href="https://{{ Auth::user()->username }}.{{ config('app.domain') }}" class="btn btn-lg btn-outline">View Profile
+                        <br><a href="{{ Auth::user()->getProfileUrl() }}" class="btn btn-lg btn-outline">View Profile
                         </a>
                     @endif
 

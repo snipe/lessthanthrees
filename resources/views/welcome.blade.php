@@ -25,13 +25,22 @@
                     </p>
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="{{ config('app.url') }}/login" class="btn btn-success btn-lg">
-                        <i class="fa fa-download"></i> Login / Register
+                    @if (Auth::check())
+                    <a href="{{ route('home')  }}" class="btn btn-success btn-lg">
+                        Add Items
                     </a>
+                    <a href="{{ Auth::user()->getProfileUrl()  }}" class="btn btn-success btn-lg">
+                        View Profile
+                    </a>
+                    @else
+                        <a href="{{ config('app.url') }}/login" class="btn btn-success btn-lg">
+                            Login / Register
+                        </a>
+
+                        <br>(It's free!)
+                    @endif
                 </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    (It's free!)
-                </div>
+
             </div>
         </div>
     </section>
