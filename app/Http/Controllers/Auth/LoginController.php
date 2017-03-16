@@ -110,7 +110,9 @@ class LoginController extends Controller
     protected function create(array $data)
     {
         return User::create(
-            ['email' => $data['email'],
+            [
+                'email' => $data['email'],
+                'username' => str_slug($data['name']),
                 'password' => bcrypt($data['password']),
             ]
         );
