@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use Auth;
+use App\Category;
 
 class ItemsController extends Controller
 {
@@ -30,7 +31,7 @@ class ItemsController extends Controller
 
 
     public function readItems() {
-        $items = Item::with('category')->get();
+        $items = Item::with('category')->where('user_id','=',Auth::user()->id)->get();
         return $items;
     }
 
@@ -45,6 +46,26 @@ class ItemsController extends Controller
     }
 
     public function deleteItem(Request $request) {
-        Item::find($request->id)->delete ();
+        Item::find($request->id)->where('user_id','=',Auth::user()->id)->delete();
+    }
+
+
+    public function showUserHome() {
+        return view('welcome');
+    }
+
+    public function showUserItems(Request $request, $subdomain, $category = null) {
+
+        $category = Category::where('slug','=',$category)->first();
+
+        if ($category) {
+            $items = Item::with('category')
+                ->where('category_id','=',$category->id)
+                ->where('user_id','=',$request->selected_account->id)->get();
+            return view('pages/items')->with('items',$items)->with('category',$category);
+        }
+
+        return view('pages/home')->with('error','Invalid category');
+
     }
 }
