@@ -53,6 +53,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="https://{{ Auth::user()->username }}.{{ config('app.domain') }}">Public Profile</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
@@ -108,6 +109,12 @@
                         @endif
 
                         </span>
+
+                    @if (!isset($selected_account))
+                        <br><a href="https://{{ Auth::user()->username }}.{{ config('app.domain') }}" class="btn btn-lg btn-outline">View Profile
+                        </a>
+                    @endif
+
                 </div>
             </div>
         </div>
