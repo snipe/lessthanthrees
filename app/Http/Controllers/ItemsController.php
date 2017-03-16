@@ -15,7 +15,7 @@ class ItemsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+
     }
 
     /**
@@ -30,13 +30,14 @@ class ItemsController extends Controller
 
 
     public function readItems() {
-        $faves = Item::all();
-        return $faves;
+        $items = Item::with('category')->get();
+        return $items;
     }
 
     public function storeItem(Request $request) {
         $data = new Item();
         $data->name = $request->name;
+        $data->category_id = $request->category_id;
         $data->user_id = Auth::user()->id;
         $data->save();
         return $data;
