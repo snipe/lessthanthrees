@@ -49,7 +49,7 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <img src="{{ url('/') }}/img/lessthanthree-sm.png" class="user-image" alt="User Image"> {{ Auth::user()->name }} <span class="caret"></span>
+                            <img src="{{ Auth::user() ->gravatar() }}" class="user-image" alt="User Image"> {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
@@ -80,13 +80,21 @@
     <div class="container" id="maincontent" tabindex="-1">
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-responsive round-image" src="{{ url('/') }}/img/lessthanthree-sm.png" alt="">
+                @if ((isset($selected_account)) && (Auth::check()))
+                    <img class="img-responsive round-image" src="{{ Auth::user() ->gravatar() }}" alt="">
+                @else
+                    <img class="img-responsive round-image" src="{{ url('/') }}/img/lessthanthree-sm.png" alt="">
+                @endif
+
+
                 <div class="intro-text">
                     <h1 class="name">
                         @if (isset($selected_account))
-                            {{ $selected_account->name }}
+                            {{ $selected_account->name }} &lt;3s
+                        @else
+                            {{ config('app.name') }}
                         @endif
-                            {{ config('app.name') }}</h1>
+                    </h1>
                     <hr class="star-light">
                     <span class="skills">
 

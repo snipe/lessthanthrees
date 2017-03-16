@@ -8034,8 +8034,8 @@ div#maincontent {
   color: #18BC9C;
 }
 .round-image {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
 }
 @media (max-width: 200px) {

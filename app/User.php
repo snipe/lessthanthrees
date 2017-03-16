@@ -112,4 +112,17 @@ class User extends Authenticatable
     public function getProfileUrl() {
         return 'https://'.$this->username.'.'.config('app.domain');
     }
+
+    /**
+     * Return the URL of the user's avatar (or gravatar)
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param string $size
+     * @since  [v1.0]
+     * @return string
+     */
+    public function gravatar($size = null)
+    {
+        return "https://gravatar.com/avatar/".md5(strtolower(trim($this->email)))."?d=mm&s=200";
+    }
 }
