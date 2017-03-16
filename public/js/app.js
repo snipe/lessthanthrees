@@ -11236,7 +11236,7 @@ var app = new Vue({
             } else {
                 this.hasError = true;
                 axios.post('/vueitems', input).then(function (response) {
-                    _this2.newItem = { 'name': '' };
+                    _this2.newItem = { 'name': '', 'category_id': input['category_id'] };
                     _this2.getVueItems();
                 });
                 this.hasDeleted = true;

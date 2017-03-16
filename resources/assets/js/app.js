@@ -50,7 +50,7 @@ const app = new Vue({
                 this.hasError = true;
                 axios.post('/vueitems',input)
                     .then(response => {
-                    this.newItem = {'name':''};
+                    this.newItem = {'name':'','category_id': input['category_id']};
                 this.getVueItems();
             });
                 this.hasDeleted = true;
