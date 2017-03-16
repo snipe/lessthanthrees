@@ -110,7 +110,7 @@
 
                         </span>
 
-                    @if (!isset($selected_account))
+                    @if ((Auth::check()) && (!isset($selected_account)))
                         <br><a href="{{ Auth::user()->getProfileUrl() }}" class="btn btn-lg btn-outline">View Profile
                         </a>
                     @endif
