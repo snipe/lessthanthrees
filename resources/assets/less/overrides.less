@@ -71,6 +71,7 @@ hr.star-primary:after {
 	margin: 0 auto;
 }
 
+
 header {
 	text-align: center;
 	background: @theme-success;
@@ -78,6 +79,7 @@ header {
 	.container {
 		padding-top: 100px;
 		padding-bottom: 50px;
+		margin-bottom: 20px;
 	}
 	img {
 		display: block;
@@ -372,16 +374,6 @@ footer {
 	font-weight: 700;
 }
 
-.btn-social {
-	display: inline-block;
-	height: 50px;
-	width: 50px;
-	border: 2px solid white;
-	border-radius: 100%;
-	text-align: center;
-	font-size: 20px;
-	line-height: 45px;
-}
 
 .scroll-top {
     position: fixed;
@@ -474,4 +466,20 @@ div#maincontent{
 .navbar-default .navbar-nav .open .dropdown-menu>li>a,.navbar-default .navbar-nav .open .dropdown-menu {
 	background-color: white;
 	color: @theme-success;
+}
+
+
+.user-image {
+	float: left;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	margin-right: 10px;
+	margin-top: -2px;
+	@media (max-width: @screen-xs-max) {
+		float: none;
+		margin-right: 0;
+		margin-top: -8px;
+		line-height: 10px;
+	}
 }
