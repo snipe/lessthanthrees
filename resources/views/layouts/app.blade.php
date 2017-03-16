@@ -7,10 +7,17 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <link rel="icon" type="image/png" href="{{ url('/') }}/favicon.ico">
 
-    <title>{{ config('app.name') }}</title>
+    <title>
+
+        @section('title')
+            @if (isset($category))
+                {{ $category->name }}
+            @endif
+        @show
+
+            {{ config('app.name') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
@@ -55,7 +62,8 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="https://{{ Auth::user()->username }}.{{ config('app.domain') }}">Public Profile</a></li>
+                            <li><a href="{{ Auth::user()->getProfileUrl() }}">Public Profile</a></li>
+                            <li><a href="{{ config('app.url') }}/saved">Saved</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
