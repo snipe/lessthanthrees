@@ -12,11 +12,19 @@
 */
 
 
-Route::group(['domain' => '{account}.'.config('app.domain')], function () {
-    Route::get('/', function ($account) {
-        dd($account);
-    });
+Route::pattern('subdomain', '^((?!www).)*$');
+
+Route::group([
+    'domain' => '{subdomain}.'.config('app.domain'),
+    'middleware' => \App\Http\Middleware\Subdomain::class], function () {
+
+    Route::get('/{category}', array('as' => 'user.home', 'uses' => 'ItemsController@showUserItems'));
+    Route::get('/', array('as' => 'user.home', 'uses' => 'ItemsController@showUserHome'));
+
 });
+
+
+
 
 
 Route::get ( '/vueitems', 'ItemsController@readItems' );
