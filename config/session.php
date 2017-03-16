@@ -122,7 +122,7 @@ return [
     |
     */
 
-    'cookie' => 'laravel_session',
+    'cookie' => env('COOKIE_NAME', 'file'),
 
     /*
     |--------------------------------------------------------------------------
@@ -148,7 +148,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', null),
+    'domain' => env('COOKIE_DOMAIN', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -174,6 +174,6 @@ return [
     |
     */
 
-    'http_only' => true,
+    'http_only' => env('SECURE_COOKIES', true),
 
 ];
