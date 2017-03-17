@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <script>
-        var selected_category = "";
-    </script>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">

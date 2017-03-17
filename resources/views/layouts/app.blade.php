@@ -32,6 +32,10 @@
 </head>
 <body id="page-top" class="index">
 
+<script>
+    var selected_category = "{{ (isset($category)) ?  $category->slug: '' }}";
+</script>
+
 <!-- Navigation -->
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container">
@@ -63,7 +67,7 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ Auth::user()->getProfileUrl() }}">Public Profile</a></li>
-                            <li><a href="{{ config('app.url') }}/saved">Saved</a></li>
+                            <!-- <li><a href="{{ config('app.url') }}/saved">Saved</a></li> -->
                             <li>
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
