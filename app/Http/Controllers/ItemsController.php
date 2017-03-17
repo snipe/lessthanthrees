@@ -48,7 +48,7 @@ class ItemsController extends Controller
     }
 
     public function deleteItem(Request $request) {
-        Item::find($request->id)->where('user_id','=',Auth::user()->id)->delete();
+        Item::where('id','=',$request->id)->where('user_id','=',Auth::user()->id)->delete();
     }
 
     public function faveItem(Request $request) {
@@ -86,11 +86,18 @@ class ItemsController extends Controller
 
     public function showUserItems(Request $request, $subdomain, $category = null) {
 
-        if ($category = Category::where('slug','=',$category)->first()) {
-            return  Item::with('category')
-                ->where('category_id','=',$category->id)
-                ->where('user_id','=',$request->selected_account->id)->get();
+        if ($category) {
+            if ($category = Category::where('slug','=',$category)->first()) {
+                return  Item::with('category')
+                    ->where('category_id','=',$category->id)
+                    ->where('user_id','=',$request->selected_account->id)->get();
+            }
+        } else {
+                return  Item::with('category')
+                    ->where('user_id','=',$request->selected_account->id)->get();
+            
         }
+
 
     }
 
