@@ -89,7 +89,7 @@ var app = new Vue({
             axios.get('/vueitems/' + selected_category).then(function (response) {
                 _this.items = response.data;
             });
-            console.dir(response.data);
+            //console.dir(response.data);
         },
 
         createItem: function () {
