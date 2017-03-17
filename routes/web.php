@@ -21,13 +21,14 @@ Route::group([
     Route::get('/home', array('as' => 'user.home', 'uses' => 'ItemsController@showUserHome'));
     Route::post('/fave/{id}', array('as' => 'item.fave', 'uses' => 'ItemsController@faveItem'));
     Route::post('/unfave/{id}', array('as' => 'item.unfave', 'uses' => 'ItemsController@unfaveItem'));
-    Route::get('/vueitems/{category}', array('as' => 'user.items.list', 'uses' => 'ItemsController@showUserItems'));
+    Route::get('/vueitems/{category?}', array('as' => 'user.items.list', 'uses' => 'ItemsController@showUserItems'));
     Route::get('/{category}', array('as' => 'user.items', 'uses' => 'ItemsController@showItemsPage'));
     Route::get('/', array('as' => 'user.home', 'uses' => 'ItemsController@showUserHome'));
 
 });
 
-
+Route::post('/fave/{id}', array('as' => 'item.fave', 'uses' => 'ItemsController@faveItem'));
+Route::post('/unfave/{id}', array('as' => 'item.unfave', 'uses' => 'ItemsController@unfaveItem'));
 Route::get('/saved', array('as' => 'user.faved', 'uses' => 'ItemsController@showUserFavesPage'));
 Route::post('/unfave/{id}', array('as' => 'item.unfave', 'uses' => 'ItemsController@unfaveItem'));
 Route::get('/vueitems/saved', 'ItemsController@showUserFaves');
