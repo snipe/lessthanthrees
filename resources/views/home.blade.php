@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control" id="description" name="description"
-                                       required v-model="newItem.description" placeholder="Why do you love it?">
+                                       required v-model="newItem.description" placeholder="Why do you love it?"  @keyup.enter="createItem">
 
                             </div>
                             <div class="col-md-2">
