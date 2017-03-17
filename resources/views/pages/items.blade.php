@@ -1,34 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
+    <script>
+        var selected_category = "{{ $category->slug }}";
+    </script>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+
                 <div id="vue-wrapper">
 
-                <div class="table table-borderless" id="table">
-                    <table class="table table-borderless" id="table">
-                        <thead>
-                        <tr>
-                            <th class="col-md-4">Name</th>
-                            <th class="col-md-7">Notes</th>
-                            <th class="col-md-1"></th>
-                        </tr>
-                        </thead>
+                    </div>
+                    <div class="content">
+                        <div class="footer" v-show="items.length" v-cloak>
+                            <span class="item-count">
+                              <strong>@{{ remaining }}</strong> @{{ remaining | pluralize }}
+                            </span>
 
-                        <tr v-for="item in items">
-                            <td>@{{ item.name }}</td>
-                            <td>@{{ item.description }}</td>
-                            <td>
-                                <a @click.prevent="faveItem(item)" class="heart-grey">
-                                    <span class="glyphicon glyphicon-heart"></span></a>
-                            </td>
-                        </tr>
-                    </table>
-
-
+                        </div>
+                        <div class="table table-borderless" id="table">
+                            <table class="table table-borderless" id="table">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Notes</th>
+                                </tr>
+                                </thead>
+                                <tr v-for="item in items">
+                                    <td><a class="heart-grey" @click="faveItem(item)">
+                                        <i class="fa fa-heart "></i></a>
+                                    </td>
+                                    <td>@{{ item.name }}</td>
+                                    <td>@{{ item.category.name }}</td>
+                                    <td>@{{ item.description }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+
+
             </div>
         </div>
     </div>
+
 @endsection
