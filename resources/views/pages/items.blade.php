@@ -22,7 +22,9 @@
                                     <th></th>
                                     @endif
                                     <th>Name</th>
-                                    <th>Category</th>
+                                        @if (!isset($category))
+                                        <th>Category</th>
+                                        @endif
                                     <th>Notes</th>
                                     <th></th>
                                 </tr>
@@ -36,7 +38,9 @@
                                     <td>
                                         @{{ item.name }}
                                     </td>
-                                    <td>@{{ item.category.name }}</td>
+                                        @if (!isset($category))
+                                            <td>@{{ item.category.name }}</td>
+                                        @endif
                                     <td>@{{ item.description }}</td>
 
                                 </tr>
