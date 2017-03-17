@@ -49,7 +49,6 @@
                             <table class="table table-borderless" id="table">
                                 <thead>
                                 <tr>
-                                    <th></th>
                                     <th>Name</th>
                                     <th>Category</th>
                                     <th>Notes</th>
@@ -57,9 +56,6 @@
                                 </tr>
                                 </thead>
                                 <tr v-for="item in items">
-                                    <td> <a class="heart-grey" @click="faveItem(item)">
-                                        <i class="fa fa-heart "></i></a></td>
-                                    <td>
                                         <label @dblclick="editItem(item)">
                                             @{{ item.name }}
                                         </label>

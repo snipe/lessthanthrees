@@ -18,7 +18,9 @@
                             <table class="table table-borderless" id="table">
                                 <thead>
                                 <tr>
+                                    @if (Auth::check())
                                     <th></th>
+                                    @endif
                                     <th>Name</th>
                                     <th>Category</th>
                                     <th>Notes</th>
@@ -26,8 +28,11 @@
                                 </tr>
                                 </thead>
                                 <tr v-for="item in items">
+                                    @if (Auth::check())
                                     <td> <a class="heart-grey" @click="faveItem(item)">
-                                        <i class="fa fa-heart "></i></a></td>
+                                        <i class="fa fa-heart "></i></a>
+                                    </td>
+                                    @endif
                                     <td>
                                         @{{ item.name }}
                                     </td>
