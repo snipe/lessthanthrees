@@ -33,7 +33,7 @@ class ItemsController extends Controller
 
 
     public function readItems() {
-        $items = Item::with('category')->where('user_id','=',Auth::user()->id)->get();
+        $items = Item::with('category')->where('user_id','=',Auth::user()->id)->orderBy('items.created_at','DESC')->get();
         return $items;
     }
 
@@ -90,11 +90,14 @@ class ItemsController extends Controller
             if ($category = Category::where('slug','=',$category)->first()) {
                 return  Item::with('category')
                     ->where('category_id','=',$category->id)
-                    ->where('user_id','=',$request->selected_account->id)->get();
+                    ->where('user_id','=',$request->selected_account->id)
+                    ->orderBy('items.created_at','DESC')->get();
             }
         } else {
                 return  Item::with('category')
-                    ->where('user_id','=',$request->selected_account->id)->get();
+                    ->where('user_id','=',$request->selected_account->id)
+                    ->orderBy('items.created_at','DESC')
+                    ->get();
             
         }
 
