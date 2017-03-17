@@ -29,9 +29,7 @@
                     <a href="{{ config('app.url') }}/home" class="btn btn-success btn-lg">
                         Add Items
                     </a>
-                    <a href="{{ Auth::user()->getProfileUrl()  }}" class="btn btn-success btn-lg">
-                        View Profile
-                    </a>
+                   
                     @else
                         <a href="{{ config('app.url') }}/login" class="btn btn-success btn-lg">
                             Login / Register
