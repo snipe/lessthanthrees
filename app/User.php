@@ -69,7 +69,7 @@ class User extends Authenticatable
             if ($socialUser->getNickname()=='') {
                 $user->username = str_slug($socialUser->getName());
             } else {
-                $user->username = $socialUser->getNickname();
+                $user->username = str_slug($socialUser->getNickname());
             }
 
             if (!$user->save()) {
@@ -78,7 +78,8 @@ class User extends Authenticatable
         }
 
         $social = $user->social()->firstOrNew(
-            ['user_id' => $user->id,
+            [
+                'user_id' => $user->id,
                 'service'=>$provider,
                 'uid' => $socialUser->getId()
             ]
