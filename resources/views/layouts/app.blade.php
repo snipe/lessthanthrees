@@ -60,7 +60,8 @@
                 @if (Auth::guest())
                     <li><a href="{{ config('app.url') }}/login">Login / Register</a></li>
                 @else
-                    <li class="dropdown">
+                        <li><a href="{{ config('app.url') }}/home">Add Stuff!</a></li>
+                        <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <img src="{{ Auth::user() ->gravatar() }}" class="user-image" alt="User Image"> {{ Auth::user()->name }} <span class="caret"></span>
                         </a>

@@ -56,6 +56,7 @@
                                 </tr>
                                 </thead>
                                 <tr v-for="item in items">
+                                    <td>
                                         <label @dblclick="editItem(item)">
                                             @{{ item.name }}
                                         </label>
