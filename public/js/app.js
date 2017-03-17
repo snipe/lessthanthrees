@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 37);
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -11203,55 +11203,166 @@ __webpack_require__(31);
  * the JavaScript scaffolding to fit your unique needs.
  */
 
+// visibility filters
+var filters = {
+    all: function all(items) {
+        return items;
+    },
+    active: function active(items) {
+        return items.filter(function (item) {
+            return !item.completed;
+        });
+    },
+    completed: function completed(items) {
+        return items.filter(function (item) {
+            return item.completed;
+        });
+    }
+};
+
+// app Vue instance
 var app = new Vue({
     el: '#vue-wrapper',
 
+    // app initial state
     data: {
         items: [],
+        newItem: { 'name': '', 'category_id': '1', 'description': '' },
+        editedItem: null,
+        visibility: 'all',
         hasError: true,
-        hasDeleted: true,
-        newItem: { 'name': '', 'category_id': '1', 'description': '' }
+        hasDeleted: true
     },
-    mounted: function mounted() {
-        this.getVueItems();
-    },
-    methods: {
-        getVueItems: function getVueItems() {
-            var _this = this;
 
-            axios.get('/vueitems').then(function (response) {
+    created: function created() {
+        this.fetchItemData();
+    },
+
+    computed: {
+        filteredItems: function filteredItems() {
+            return filters[this.visibility](this.items);
+        },
+        remaining: function remaining() {
+            return filters.active(this.items).length;
+        },
+        allDone: {
+            get: function get() {
+                return this.remaining === 0;
+            },
+            set: function set(value) {
+                this.items.forEach(function (item) {
+                    item.completed = value;
+                });
+            }
+        }
+    },
+
+    filters: {
+        pluralize: function pluralize(n) {
+            return n === 1 ? 'item' : 'items';
+        }
+    },
+
+    methods: {
+
+        fetchItemData: function fetchItemData() {
+            var _this = this;
+            axios.get('/vueitems/' + selected_category).then(function (response) {
                 _this.items = response.data;
             });
         },
+
         createItem: function createItem() {
             var _this2 = this;
 
             var input = this.newItem;
-
-            console.dir(input);
-
             if (input['name'] == '') {
                 this.hasError = false;
-                this.hasDeleted = true;
             } else {
                 this.hasError = true;
                 axios.post('/vueitems', input).then(function (response) {
                     _this2.newItem = { 'name': '', 'category_id': input['category_id'] };
-                    _this2.getVueItems();
+                    _this2.fetchItemData();
                 });
-                this.hasDeleted = true;
             }
         },
+
         deleteItem: function deleteItem(item) {
             var _this3 = this;
 
             axios.post('/vueitems/' + item.id).then(function (response) {
-                _this3.getVueItems();
-                _this3.hasError = true, _this3.hasDeleted = false;
+                _this3.fetchItemData();
             });
+        },
+
+        editItem: function editItem(item) {
+            this.beforeEditCache = item.name;
+            this.editedItem = item;
+        },
+
+        doneEdit: function doneEdit(item) {
+            if (!this.editedItem) {
+                return;
+            }
+            this.editedItem = null;
+            item.name = item.name.trim();
+            if (!item.name) {
+                this.removeItem(item);
+            }
+        },
+
+        cancelEdit: function cancelEdit(item) {
+            this.editedItem = null;
+            item.name = this.beforeEditCache;
+        },
+
+        removeCompleted: function removeCompleted() {
+            this.items = filters.active(this.items);
+        },
+
+        faveItem: function faveItem(item) {
+            var _this4 = this;
+
+            axios.post('/fave/' + item.id).then(function (response) {
+                _this4.fetchItemData();
+            });
+        },
+
+        unfaveItem: function unfaveItem(item) {
+            var _this5 = this;
+
+            axios.post('/unfave/' + item.id).then(function (response) {
+                _this5.fetchItemData();
+            });
+        }
+
+    },
+
+    // a custom directive to wait for the DOM to be updated
+    // before focusing on the input field.
+    // http://vuejs.org/guide/custom-directive.html
+    directives: {
+        'item-focus': function itemFocus(el, value) {
+            if (value) {
+                el.focus();
+            }
         }
     }
 });
+
+// handle routing
+function onHashChange() {
+    var visibility = window.location.hash.replace(/#\/?/, '');
+    if (filters[visibility]) {
+        app.visibility = visibility;
+    } else {
+        window.location.hash = '';
+        app.visibility = 'all';
+    }
+}
+
+window.addEventListener('hashchange', onHashChange);
+onHashChange();
 
 $(function () {
 
@@ -12132,7 +12243,7 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(34);
+window._ = __webpack_require__(33);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -12150,7 +12261,7 @@ __webpack_require__(32);
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = __webpack_require__(35);
+window.Vue = __webpack_require__(34);
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -14509,8 +14620,7 @@ if (typeof jQuery === 'undefined') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 33 */,
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -31599,10 +31709,10 @@ if (typeof jQuery === 'undefined') {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(36)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(35)(module)))
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40855,7 +40965,7 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(9)))
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -40883,7 +40993,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(10);
