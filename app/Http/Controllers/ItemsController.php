@@ -70,8 +70,18 @@ class ItemsController extends Controller
     }
 
 
-    public function showUserHome() {
-        return view('welcome');
+    public function showUserHome(Request $request) {
+        $categoryCount = DB::table('items')
+          ->join('categories', 'items.category_id', '=', 'categories.id')
+          ->where('user_id', '=', $request->selected_account->id)
+          ->select('categories.name', DB::raw('count(*) as total'))
+          ->groupBy('categories.name')
+          ->orderBy('total', 'DESC')
+          ->pluck('total','categories.name')->all();
+
+        $categories = Category::all();
+
+        return view('welcome', ['categoryCounts' => $categoryCount, 'categories' => $categories]);
     }
 
     public function showItemsPage(Request $request, $subdomain, $category = null) {
