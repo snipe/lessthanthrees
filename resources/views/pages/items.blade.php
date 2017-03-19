@@ -36,7 +36,7 @@
                                 </thead>
                                 <tr v-for="item in items">
                                     @if (Auth::check())
-                                    <td> <a class="heart-grey" @click="faveItem(item)">
+                                    <td> <a class="btn btn-default heart-grey no-border" @click="faveItem(item)">
                                         <i class="fa fa-heart "></i></a>
                                     </td>
                                     @endif
