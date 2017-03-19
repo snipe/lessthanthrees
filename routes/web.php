@@ -22,10 +22,15 @@ Route::group([
     Route::post('/fave/{id}', array('as' => 'item.fave', 'uses' => 'ItemsController@faveItem'));
     Route::post('/unfave/{id}', array('as' => 'item.unfave', 'uses' => 'ItemsController@unfaveItem'));
     Route::get('/vueitems/{category?}', array('as' => 'user.items.list', 'uses' => 'ItemsController@showUserItems'));
+    Route::get('/login', function () {
+        return redirect()->route('home');
+    });
     Route::get('/{category}', array('as' => 'user.items', 'uses' => 'ItemsController@showItemsPage'));
     Route::get('/', array('as' => 'user.home', 'uses' => 'ItemsController@showUserHome'));
 
 });
+
+
 
 Route::post('/fave/{id}', array('as' => 'item.fave', 'uses' => 'ItemsController@faveItem'));
 Route::post('/unfave/{id}', array('as' => 'item.unfave', 'uses' => 'ItemsController@unfaveItem'));
@@ -41,6 +46,22 @@ Route::post('/vueitems', 'ItemsController@storeItem' );
 Route::get('auth/{provider}', [ 'as' => 'oauth', 'uses' => 'Auth\LoginController@redirectToProvider' ]);
 Route::get('auth/{provider}/callback', [ 'as' => 'oauth.callback', 'uses' => 'Auth\LoginController@handleProviderCallback' ]);
 
+
+
+Route::group([ 'prefix' => 'account','middleware' => ['auth']], function () {
+
+    Route::get('/', array('as' => 'account.home', 'uses' => 'AccountController@index'));
+    Route::get('/subscription', array('as' => 'account.subscription', 'uses' => 'AccountController@getSubscription'));
+    Route::post('/subscription', array('as' => 'account.subscription.process', 'uses' => 'AccountController@processSubscription'));
+    Route::post('/subscription/cancel', array('as' => 'account.subscription.cancel', 'uses' => 'AccountController@processCancellation'));
+    Route::post('/subscription/reactivate', array('as' => 'account.subscription.reactivate', 'uses' => 'AccountController@processReactivation'));
+
+});
+
+Route::post(
+    'stripe/webhook',
+    '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook'
+);
 
 /*
  * General routes
