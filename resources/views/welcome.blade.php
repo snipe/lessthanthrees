@@ -2,6 +2,28 @@
 
 @section('content')
 
+    <!-- Populated Lists -->
+    @if (isset($categories))
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3 text-center">
+                <ul class="nav nav-pills" role="tablist">
+                @foreach ($categories as $category)
+                    @if (!empty($categoryCounts[$category->name]))
+                        <li role="presentation"><a class="text-uppercase" href="{{ url('/') }}/{{ $category->slug }}">
+                                <i class="{{ $category->icon }}"></i> {{ $category->name }}
+                                <span class="badge">{{ $categoryCounts[$category->name] }}</span>
+                            </a>
+                        </li>
+                    @else
+                        <li role="presentation" class="disabled">
+                            <a class="text-uppercase" href=""><i class="{{ $category->icon }}"></i> {{ $category->name }}</a>
+                        </li>
+                    @endif
+                @endforeach
+                </ul>
+            </div>
+        </div>
+    @endif
 
     <!-- Contact Section -->
     <section id="contact">
