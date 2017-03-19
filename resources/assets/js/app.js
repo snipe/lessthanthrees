@@ -54,6 +54,7 @@ var app = new Vue({
         loading: false
     },
 
+
     created: function () {
         this.fetchItemData()
     },
