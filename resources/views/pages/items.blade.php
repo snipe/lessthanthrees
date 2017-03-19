@@ -18,18 +18,21 @@
                         </form>
 
 
-                        <div class="footer" v-show="items.length" v-cloak>
-                            <span class="item-count">
-                              <strong>@{{ remaining }}</strong> @{{ remaining | pluralize }}
-                            </span>
+                        <div class="col-md-12 text-center" v-if="loading" v-cloak>
+                            <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw loading"></i>
+                            <span>Loading...</span>
                         </div>
+
+
+                        <div v-show="items.length" v-cloak>
+                                <span class="item-count">
+                                  <strong>@{{ remaining }} @{{ remaining | pluralize }}</strong>
+                                </span>
+                        </div>
+
 
                         <transition>
                         <div class="table table-borderless" id="table" v-if="items.length > 0">
-                            <div v-if="loading" v-cloak>
-                                <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-                                <span>Loading...</span>
-                            </div>
 
                             <table class="table table-borderless" id="table">
                                 <thead>
@@ -63,7 +66,6 @@
                                 </tr>
                             </table>
                         </div>
-                            <p v-else>Sorry, no items found.</p>
                         </transition>
                     </div>
                 </div>
