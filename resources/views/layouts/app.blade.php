@@ -29,8 +29,19 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
 </head>
 <body id="page-top" class="index">
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId={{ config('services.facebook.client_id') }}";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
 
 <script>
     var selected_category = "{{ (isset($category)) ?  $category->slug: '' }}";
@@ -140,6 +151,23 @@
                         </a>
                     @endif
 
+
+
+
+                    @if (isset($selected_account))
+                        <div class="col-md-12" style="padding-top: 30px;">
+                            <div class="col-md-6 text-right">
+                                <div class="fb-share-button" data-href="{{ urlencode(url('/')) }}" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url('/')) }}">Share</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-left">
+                                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{ urlencode('Check out this list of things I love at #LessThanThrees! '.url('/')) }}"> Tweet
+                                </a>
+                            </div>
+
+                        </div>
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -171,6 +199,26 @@
         </div>
     </div>
 </footer>
+
+<script>window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+            t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));</script>
+
+@section('moar_scripts')
+@show
 
 </body>
 </html>
