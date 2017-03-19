@@ -40,12 +40,20 @@
                         <p class="text-center alert alert-success"
                            v-bind:class="{ hidden: hasDeleted }">Deleted Successfully!</p>
 
-                    <div class="footer" v-show="items.length" v-cloak>
-                            <span class="item-count">
-                              <strong>@{{ remaining }}</strong> @{{ remaining | pluralize }}
-                            </span>
-                    </div>
+                        <div v-show="items.length" v-cloak>
+                                <span class="item-count">
+                                  <strong>@{{ remaining }}</strong> @{{ remaining | pluralize }}
+                                </span>
+                        </div>
                         <div class="table table-borderless" id="table">
+
+                            <div v-if="loading" v-cloak>
+                                <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                                <span>Loading...</span>
+                            </div>
+
+
+
                             <table class="table table-borderless" id="table">
                                 <thead>
                                 <tr>
@@ -65,8 +73,9 @@
                                     <td>@{{ item.description }}</td>
                                     <td>
 
-                                        <a @click.prevent="deleteItem(item)" class="heart-grey">
-                                            <i class="fa fa-times"></i></a>
+                                        <a @click.prevent="deleteItem(item)" class="btn btn-default no-border heart-grey">
+                                            <i class="fa fa-times"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             </table>
