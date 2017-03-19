@@ -51,7 +51,9 @@ var app = new Vue({
         visibility: 'all',
         hasError: true,
         hasDeleted: true,
-        loading: false
+        loading: true,
+        showAsFaved: true,
+        searchString: ''
     },
 
 
@@ -60,9 +62,33 @@ var app = new Vue({
     },
 
     computed: {
+
         filteredItems: function () {
-            return filters[this.visibility](this.items)
+            var items_array = this.items,
+                searchString = this.searchString;
+
+            // console.dir(this.items);
+            // console.dir(searchString);
+
+            if (!searchString){
+                return items_array;
+            }
+
+            searchString = searchString.trim().toLowerCase();
+
+            items_array = items_array.filter(function(item) {
+                if(item.name.toLowerCase().indexOf(searchString) !== -1){
+                    return item;
+                }
+            })
+
+            // Return an array with the filtered data.
+            return items_array;
         },
+        
+        // filteredItems: function () {
+        //     return filters[this.visibility](this.items)
+        // },
         remaining: function () {
             return filters.active(this.items).length
         },

@@ -8,6 +8,14 @@
 
                 <div id="vue-wrapper">
 
+                    <form id="main" v-cloak>
+                        <div class="bar">
+                            <!-- Create a binding between the searchString model and the text field -->
+                            <input type="text" v-model="searchString" placeholder="Enter your search terms" />
+                        </div>
+                    </form>
+
+
                     <div class="content">
                         <div class="form-group row">
                             <div class="col-md-4">
@@ -45,7 +53,8 @@
                                   <strong>@{{ remaining }}</strong> @{{ remaining | pluralize }}
                                 </span>
                         </div>
-                        <div class="table table-borderless" id="table">
+                        <transition>
+                        <div class="table table-borderless" id="table" v-if="items.length > 0">
 
                             <div v-if="loading" v-cloak>
                                 <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
@@ -63,7 +72,7 @@
                                     <th></th>
                                 </tr>
                                 </thead>
-                                <tr v-for="item in items">
+                                <tr v-for="item in filteredItems">
                                     <td>
                                         <label @dblclick="editItem(item)">
                                             @{{ item.name }}
@@ -73,13 +82,15 @@
                                     <td>@{{ item.description }}</td>
                                     <td>
 
-                                        <a @click.prevent="deleteItem(item)" class="btn btn-default no-border heart-grey">
+                                        <a @click.prevent="deleteItem(item)" class="btn btn-heart heart-grey no-border">
                                             <i class="fa fa-times"></i>
                                         </a>
                                     </td>
                                 </tr>
                             </table>
                         </div>
+                            <p v-else>Sorry, no items found.</p>
+                        </transition>
                     </div>
                 </div>
 
