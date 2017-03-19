@@ -172,11 +172,11 @@
 
                     @if (isset($selected_account))
                         <div class="col-md-12" style="padding-top: 30px;">
-                            <div class="col-md-6 text-right">
+                            <div class="col-md-6 col-sm-6 col-xs-6 text-right">
                                 <div class="fb-share-button" data-href="{{ urlencode(url('/')) }}" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url('/')) }}">Share</a>
                                 </div>
                             </div>
-                            <div class="col-md-6 text-left">
+                            <div class="col-md-6 col-sm-6  col-xs-6  text-left">
                                 <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{ urlencode('Check out this list of things I love at #LessThanThrees! '.url('/')) }}"> Tweet
                                 </a>
                             </div>
