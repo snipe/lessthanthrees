@@ -4,9 +4,10 @@
 
     <!-- Populated Lists -->
     @if (isset($categories))
-        <div class="row">
-            <div class="col-lg-6 col-lg-offset-3 text-center">
+        <div class="container">
+            <div class="col-lg-12 centered-pills">
                 <ul class="nav nav-pills" role="tablist">
+
                 @foreach ($categories as $category)
                     @if (!empty($categoryCounts[$category->name]))
                         <li role="presentation"><a class="text-uppercase" href="{{ url('/') }}/{{ $category->slug }}">
@@ -16,13 +17,14 @@
                         </li>
                     @else
                         <li role="presentation" class="disabled">
-                            <a class="text-uppercase" href=""><i class="{{ $category->icon }}"></i> {{ $category->name }}</a>
+                            <a class="text-uppercase"><i class="{{ $category->icon }}"></i> {{ $category->name }}</a>
                         </li>
                     @endif
                 @endforeach
                 </ul>
             </div>
         </div>
+
     @endif
 
     <!-- Contact Section -->
