@@ -55,7 +55,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name') }}</a>
+             <a class="navbar-brand" href="{{ url('/') }}"><img class="brand" src="{{ url('/') }}/img/logo.png" alt="{{ config('app.name') }}"> </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -74,7 +74,7 @@
 
                         <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <img src="{{ Auth::user() ->gravatar() }}" class="user-image" alt="User Image"> {{ Auth::user()->name }} <span class="caret"></span>
+                            <img src="{{ Auth::user()->gravatar() }}" class="user-image" alt="User Image"> {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">

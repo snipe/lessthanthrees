@@ -968,4 +968,13 @@ ul.checkmark li:before {
 	margin:0 5px 0 -15px;
 	color: @theme-success;
 }
+.navbar-brand {
+	padding: 0px; /* firefox bug fix */
+}
 
+.navbar-brand>img {
+	height: 100%;
+	padding: 15px; /* firefox bug fix */
+	width: auto;
+
+}
