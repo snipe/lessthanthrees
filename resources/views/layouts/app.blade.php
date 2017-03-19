@@ -80,6 +80,8 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ config('app.url') }}/home">Add Stuff!</a></li>
                             <li><a href="{{ Auth::user()->getProfileUrl() }}">Public Profile</a></li>
+                            <li>
+                                <a href="{{ config('app.url') }}/account/subscription">{{ (Auth::user()->subscribed('monthly')) ? 'Subscription' : 'Upgrade' }}</a></li>
                             <!-- <li><a href="{{ config('app.url') }}/saved">Saved</a></li> -->
                             <li>
                                 <a href="{{ route('logout') }}"
@@ -101,6 +103,20 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+
+@if (!Auth::check() || !Auth::user()->subscribed('monthly'))
+<!-- subnav here -->
+<div class=" navbar navbar-static-top subnav" role="navigation">
+    <div class="navbar-inner">
+        <div class="container ad-text text-center">
+
+            <a target="_blank" href="https://www.amazon.com/gp/video/primesignup?ref_=assoc_tag_ph_1402131641212&_encoding=UTF8&camp=1789&creative=9325&linkCode=pf4&tag={{ config('services.affiliate.amazon') }}&linkId=cd36abf3f3f5a0196847fdfc25efe942"><img src="/img/amazon-prime-video.png" style="height: 25px; width: auto; padding-right: 15px;"> Watch Thousands of Movies & TV Shows Anytime! Start Your Free Trial Now!</a><img src="//ir-na.amazon-adsystem.com/e/ir?t=lessthanthrees-20&l=pf4&o=1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
+        </div>
+    </div>
+</div>
+
+<!-- //subnav -->
+@endif
 
 <!-- Header -->
 <header>
