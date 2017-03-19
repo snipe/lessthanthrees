@@ -50,7 +50,8 @@ var app = new Vue({
         editedItem: null,
         visibility: 'all',
         hasError: true,
-        hasDeleted: true
+        hasDeleted: true,
+        loading: false
     },
 
     created: function () {
@@ -86,10 +87,18 @@ var app = new Vue({
 
         fetchItemData: function () {
             var _this = this;
-            axios.get('/vueitems/' + selected_category).then(function (response) {
-                _this.items = response.data;
-            });
-            //console.dir(response.data);
+
+            axios.get('/vueitems/' + selected_category, {
+                before: () => {
+                    this.loading = true;
+                }
+                }).then(response => {
+                    _this.items = response.data;
+                }).then(() => {
+                    //set loading flag to false
+                    this.loading = false;
+                })
+
         },
 
         createItem: function () {
@@ -105,6 +114,11 @@ var app = new Vue({
             });
             }
         },
+
+        toggleFavActive: function(item){
+            item.active = !item.active;
+        },
+
 
         deleteItem: function(item) {
             axios.post('/vueitems/'+item.id).then((response) => {

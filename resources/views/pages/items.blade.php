@@ -15,6 +15,11 @@
                             </span>
                         </div>
                         <div class="table table-borderless" id="table">
+                            <div v-if="loading" v-cloak>
+                                <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                                <span>Loading...</span>
+                            </div>
+
                             <table class="table table-borderless" id="table">
                                 <thead>
                                 <tr>

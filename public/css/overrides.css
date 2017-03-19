@@ -507,7 +507,7 @@ div#maincontent {
 }
 .heart-grey {
   color: grey;
-  font-size: 20px;
+  font-size: 18px;
 }
 .navbar-default .navbar-nav .open .dropdown-menu > li > a,
 .navbar-default .navbar-nav .open .dropdown-menu {
@@ -970,4 +970,8 @@ ul.checkmark li:before {
   text-align: center;
   font-size: 13px;
   font-weight: 700;
+}
+.no-border {
+  border: 1px solid white;
+  border-radius: 50%;
 }

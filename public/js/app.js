@@ -11231,7 +11231,8 @@ var app = new Vue({
         editedItem: null,
         visibility: 'all',
         hasError: true,
-        hasDeleted: true
+        hasDeleted: true,
+        loading: false
     },
 
     created: function created() {
@@ -11266,15 +11267,24 @@ var app = new Vue({
     methods: {
 
         fetchItemData: function fetchItemData() {
+            var _this2 = this;
+
             var _this = this;
-            axios.get('/vueitems/' + selected_category).then(function (response) {
+
+            axios.get('/vueitems/' + selected_category, {
+                before: function before() {
+                    _this2.loading = true;
+                }
+            }).then(function (response) {
                 _this.items = response.data;
+            }).then(function () {
+                //set loading flag to false
+                _this2.loading = false;
             });
-            //console.dir(response.data);
         },
 
         createItem: function createItem() {
-            var _this2 = this;
+            var _this3 = this;
 
             var input = this.newItem;
             if (input['name'] == '') {
@@ -11282,17 +11292,21 @@ var app = new Vue({
             } else {
                 this.hasError = true;
                 axios.post('/vueitems', input).then(function (response) {
-                    _this2.newItem = { 'name': '', 'category_id': input['category_id'] };
-                    _this2.fetchItemData();
+                    _this3.newItem = { 'name': '', 'category_id': input['category_id'] };
+                    _this3.fetchItemData();
                 });
             }
         },
 
+        toggleFavActive: function toggleFavActive(item) {
+            item.active = !item.active;
+        },
+
         deleteItem: function deleteItem(item) {
-            var _this3 = this;
+            var _this4 = this;
 
             axios.post('/vueitems/' + item.id).then(function (response) {
-                _this3.fetchItemData();
+                _this4.fetchItemData();
             });
         },
 
@@ -11322,18 +11336,18 @@ var app = new Vue({
         },
 
         faveItem: function faveItem(item) {
-            var _this4 = this;
+            var _this5 = this;
 
             axios.post('/fave/' + item.id).then(function (response) {
-                _this4.fetchItemData();
+                _this5.fetchItemData();
             });
         },
 
         unfaveItem: function unfaveItem(item) {
-            var _this5 = this;
+            var _this6 = this;
 
             axios.post('/unfave/' + item.id).then(function (response) {
-                _this5.fetchItemData();
+                _this6.fetchItemData();
             });
         }
 
