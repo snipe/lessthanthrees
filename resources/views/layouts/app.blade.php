@@ -20,7 +20,7 @@
             {{ config('app.name') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/all.css') }}?foo=bar" rel="stylesheet">
+    <link href="{{ mix('css/all.css') }}" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Scripts -->
@@ -208,7 +208,7 @@
 </footer>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}?foo=bar"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 
 <script>window.twttr = (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0],
