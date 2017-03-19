@@ -102,8 +102,8 @@ header {
 @media(min-width:768px) {
 	header {
 		.container {
-			padding-top: 200px;
-			padding-bottom: 100px;
+			padding-top: 150px;
+			padding-bottom: 50px;
 		}
 		.intro-text {
 			.name {
@@ -956,4 +956,16 @@ html .clear-completed:active {
 	}
 }
 
+ul.checkmark {
+	list-style-type:none;
+	font-size: 20px;
+	line-height: 45px;
+}
+
+ul.checkmark li:before {
+	font-family: 'FontAwesome';
+	content: '\f00c';
+	margin:0 5px 0 -15px;
+	color: @theme-success;
+}
 
