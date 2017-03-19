@@ -11,13 +11,19 @@
 
     <title>
 
+        @if (Auth::check())
+            {{ Auth::user()->name }}
+        @endif
+
+        {{ config('app.name') }}
+
         @section('title')
             @if (isset($category))
                 {{ $category->name }}
             @endif
         @show
 
-            {{ config('app.name') }}</title>
+    </title>
 
     <!-- Styles -->
     <link href="{{ asset('/css/all.css') }}" rel="stylesheet">
