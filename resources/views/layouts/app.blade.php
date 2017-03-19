@@ -48,6 +48,7 @@
 </script>
 
 <!-- Navigation -->
+<div id="navtop">
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -103,19 +104,10 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
-
-@if (!Auth::check() || !Auth::user()->subscribed('monthly'))
-<!-- subnav here -->
-<div class=" navbar navbar-static-top subnav" role="navigation">
-    <div class="navbar-inner">
-        <div class="container ad-text text-center">
-
-            <a target="_blank" href="https://www.amazon.com/gp/video/primesignup?ref_=assoc_tag_ph_1402131641212&_encoding=UTF8&camp=1789&creative=9325&linkCode=pf4&tag={{ config('services.affiliate.amazon') }}&linkId=cd36abf3f3f5a0196847fdfc25efe942"><img src="/img/amazon-prime-video.png" style="height: 25px; width: auto; padding-right: 15px;"> Watch Thousands of Movies & TV Shows Anytime! Start Your Free Trial Now!</a><img src="//ir-na.amazon-adsystem.com/e/ir?t=lessthanthrees-20&l=pf4&o=1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
-        </div>
-    </div>
 </div>
 
-<!-- //subnav -->
+@if (!Auth::check() || !Auth::user()->subscribed('monthly'))
+@include('layouts/top-ad')
 @endif
 
 <!-- Header -->
@@ -242,6 +234,15 @@
         amzn_assoc_placement = "";
         amzn_assoc_marketplace = "amazon";
         amzn_assoc_region = "US";
+
+        $('.subnav').affix({
+            offset: {
+                top: $('#navtop').height();
+                console.log($('#navtop').height());
+            }
+        });
+
+
     </script>
     <script src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&MarketPlace=US"></script>
     @endif
