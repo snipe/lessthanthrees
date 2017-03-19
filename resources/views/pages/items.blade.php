@@ -40,11 +40,11 @@
                                     @if (Auth::check())
                                     <th class="col-md-1"></th>
                                     @endif
-                                    <th class="col-md-6">Name</th>
+                                    <th class="col-md-3">Name</th>
                                         @if (!isset($category))
                                         <th>Category</th>
                                         @endif
-                                    <th class="col-md-5">Notes</th>
+                                    <th class="col-md-8">Notes</th>
                                 </tr>
                                 </thead>
                                 <tr v-for="item in filteredItems">
