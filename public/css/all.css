@@ -7641,6 +7641,20 @@ header .intro-text .skills {
   header .intro-text .skills {
     font-size: 1.75em;
   }
+  .subnav {
+    margin: 0;
+    top: 100px;
+    z-index: 1020;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #E1E1E1;
+    padding: 8px 0px 0px 0px;
+  }
+  .subnav.affix {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+  }
 }
 .navbar-custom {
   background: #2C3E50;
@@ -7728,6 +7742,20 @@ section.success {
   }
   section.first {
     padding-top: 75px;
+  }
+  .subnav {
+    margin: 0;
+    top: 50px;
+    z-index: 1020;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #E1E1E1;
+    padding: 8px 0px 0px 0px;
+  }
+  .subnav.affix {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
   }
 }
 #portfolio .portfolio-item {
@@ -8030,6 +8058,7 @@ div#maincontent {
 .navbar-default .navbar-nav .open .dropdown-menu > li > a,
 .navbar-default .navbar-nav .open .dropdown-menu {
   color: #18BC9C;
+  text-transform: capitalize;
 }
 .nav .open > a,
 .nav .open > a:hover,
@@ -8474,4 +8503,13 @@ ul.checkmark li:before {
   padding: 15px;
   /* firefox bug fix */
   width: auto;
+}
+.navbar {
+  margin-bottom: 0;
+}
+.ad-text a {
+  color: #2C3E50;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
 }

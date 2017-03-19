@@ -59,6 +59,10 @@ return [
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
 
+    'affiliate' => [
+        'amazon' => env('AMAZON_AFFILIATE'),
+    ],
+
 
 
 ];

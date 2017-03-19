@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Cashier\Billable;
 use DB;
 use App\Fave;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -133,5 +134,13 @@ class User extends Authenticatable
     public function faves()
     {
         return $this->hasMany('\App\Fave','user_id');
+    }
+
+    public function isSubscriber() {
+        if (Auth::check() && Auth::user()->subscribed('monthly')) {
+            return true;
+        }
+
+        return false;
     }
 }
