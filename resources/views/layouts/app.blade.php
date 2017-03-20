@@ -234,27 +234,13 @@
     }(document, "script", "twitter-wjs"));</script>
 
 @section('moar_scripts')
-    @if (!Auth::check() || !Auth::user()->subscribed('monthly'))
     <script type="text/javascript">
-        amzn_assoc_ad_type = "link_enhancement_widget";
-        amzn_assoc_tracking_id = "{{ config('services.affiliate.amazon') }}";
-        amzn_assoc_linkid = "86448a96c14848857f5b6fba213801eb";
-        amzn_assoc_placement = "";
-        amzn_assoc_marketplace = "amazon";
-        amzn_assoc_region = "US";
-
         $('.subnav').affix({
             offset: {
-                top: $('#navtop').height();
-                console.log($('#navtop').height());
-            }
+                top: $('#navtop').height()
+        }
         });
-
-
     </script>
-    <script src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&MarketPlace=US"></script>
-    @endif
-
 @show
 
 
