@@ -199,16 +199,17 @@
 
 
 <!-- Footer -->
-<footer class="text-center">
+<footer>
     <div class="footer-below">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-
-                     <a target="_blank" href="https://lessthanthrees.com">LessThanThrees</a> is an <a href="https://github.com/snipe/lessthanthrees">open source
-                        project</a>, made with <i class="glyphicon glyphicon-heart heart"></i> by <a href="https://twitter.com/snipeyhead"><i class="fa fa-twitter"></i>snipeyhead</a>. <br>
-                    Get updates and support at <a href="https://twitter.com/lessthan3sapp"><i class="fa fa-twitter"></i>lessthan3sapp</a>! <br>
-                    Read more about how we handle your data at our <a href="{{ config('app.url') }}/privacy">privacy statement</a>.
+                <div class="col-lg-8 col-xs-12">
+                    <a href="{{ config('app.url') }}/privacy">Privacy</a> | <a href="https://github.com/snipe/lessthanthrees">Open Source</a> |
+                     Made with <i class="glyphicon glyphicon-heart heart"></i> by <a href="https://twitter.com/snipeyhead">@snipeyhead</a>.
+                    Follow <a href="https://twitter.com/lessthan3sapp">@lessthan3sapp</a> for updates.
+                </div>
+                <div class="col-lg-4 col-xs-12 text-right">
+                     <img class="brand" src="{{ url('/') }}/img/logo.png" alt="{{ config('app.name') }}" style="height: 15px;">
                 </div>
             </div>
         </div>
