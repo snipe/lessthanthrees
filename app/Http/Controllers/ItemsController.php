@@ -33,7 +33,8 @@ class ItemsController extends Controller
 
 
     public function readItems() {
-        $items = Item::with('category')->where('user_id','=',Auth::user()->id)->orderBy('items.created_at','DESC')->get();
+        $items = Item::with('category')
+            ->where('user_id','=',Auth::user()->id)->orderBy('items.created_at','DESC')->get();
         return $items;
     }
 
@@ -62,11 +63,11 @@ class ItemsController extends Controller
     }
 
     public function unfaveItem(Request $request) {
-        if ($fave = Fave::find($request->id)) {
+        if ($fave = Fave::where('item_id','=',$request->id)->where('user_id','=',Auth::user()->id)) {
              $fave->delete();
-                 return true;
+                 return 'true';
         }
-        return false;
+        return 'false';
     }
 
 
@@ -96,26 +97,59 @@ class ItemsController extends Controller
 
     public function showUserItems(Request $request, $subdomain, $category = null) {
 
+        $items_array = array();
+        $items = Item::with('category','faves');
+
         if ($category) {
             if ($category = Category::where('slug','=',$category)->first()) {
-                return  Item::with('category')
-                    ->where('category_id','=',$category->id)
-                    ->where('user_id','=',$request->selected_account->id)
-                    ->orderBy('items.created_at','DESC')->get();
+                $items = $items->where('category_id','=',$category->id);
             }
-        } else {
-                return  Item::with('category')
-                    ->where('user_id','=',$request->selected_account->id)
-                    ->orderBy('items.created_at','DESC')
-                    ->get();
-            
         }
 
+        $items = $items->where('user_id','=',$request->selected_account->id)
+            ->orderBy('items.created_at','DESC')
+            ->get();
 
+        $counter = 0;
+
+        foreach ($items as $item) {
+            $items_array[$counter]['id'] = $item->id;
+            $items_array[$counter]['name'] = $item->name;
+            $items_array[$counter]['liked'] = false;
+            $items_array[$counter]['text'] = 'like';
+            
+            foreach ($item->faves as $faves) {
+                if ($faves->id == Auth::user()->id) {
+                    $items_array[$counter]['liked'] = true;
+                    $items_array[$counter]['text'] = 'unlike';
+                    break;
+                }
+            }
+            $items_array[$counter]['category'] = $item->category->name;
+            $items_array[$counter]['description'] = $item->description;
+            $counter++;
+        }
+
+        return $items_array;
+        
     }
 
     public function showUserFaves() {
-        return Auth::user()->faves;
+        $faves = Fave::where('user_id','=',Auth::user()->id)->with('items')->get();
+        $items_array = array();
+
+        foreach ($faves as $fave) {
+            if ($fave->items) {
+                $items_array['id'] = $fave->items->id;
+                $items_array['name'] = $fave->items->name;
+                $items_array['liked'] = true;
+                $items_array['category'] = $fave->items->category->name;
+                $items_array['description'] = $fave->items->description;
+            }
+
+        }
+
+        return $items_array;
     }
 
     public function showUserFavesPage() {

@@ -17,13 +17,17 @@ class Item extends Model
     public function category() {
         return $this->belongsTo('\App\Category');
     }
-
-
-
-    /* Method for getting a list of all saved entries */
+    
+    /* Method for getting a list of all saved entries
+    We can use ->withPivot('id') hwere later if we need to
+    */
     public function faves()
     {
-        return $this->hasMany('Fave','item_id');
+        return $this->belongsToMany('\App\User', 'user_likes', 'item_id', 'user_id');
+    }
+
+    public function favedByUser() {
+
     }
 
 

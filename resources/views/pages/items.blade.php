@@ -40,21 +40,29 @@
                                     @if (Auth::check())
                                     <th class="col-md-1"></th>
                                     @endif
+
                                     <th class="col-md-3">Name</th>
                                         @if (!isset($category))
                                         <th>Category</th>
                                         @endif
-                                    <th class="col-md-8">Notes</th>
+                                    <th class="col-md-7">Notes</th>
                                 </tr>
                                 </thead>
                                 <tr v-for="item in filteredItems">
                                     @if (Auth::check())
                                     <td>
-                                        <a class="btn btn-heart heart-grey no-border" v-on:click="showAsFaved = !showAsFaved"  @click.prevent="faveItem(item)">
-                                            <i class="fa fa-heart"></i>
+
+                                        <a
+                                        type="submit"
+                                        class="heart-grey"
+                                        v-on:click="toggleFave(item)">
+                                            <i class="fa" v-bind:class="[item.liked ? 'fa-heart text-danger' : 'fa-heart-o']"></i>
                                         </a>
+
                                     </td>
                                     @endif
+
+
                                     <td>
                                         @{{ item.name }}
                                     </td>

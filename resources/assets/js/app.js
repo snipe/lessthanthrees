@@ -31,6 +31,11 @@ var filters = {
             return !item.completed
         })
     },
+    faved: function (items) {
+        return items.filter(function (item) {
+            return !item.liked
+        })
+    },
     completed: function (items) {
         return items.filter(function (item) {
             return item.completed
@@ -52,8 +57,8 @@ var app = new Vue({
         hasError: true,
         hasDeleted: true,
         loading: true,
-        showAsFaved: true,
-        searchString: ''
+        searchString: '',
+        liked: false
     },
 
 
@@ -142,8 +147,36 @@ var app = new Vue({
             }
         },
 
-        toggleFavActive: function(item){
-            item.active = !item.active;
+        faveItem: function(item){
+            this.submitted = true;
+            axios.post('/fave/' + item.id).then((response) => {
+
+                this.fetchItemData();
+            this.liked = true;
+            this.submitted = false;
+            this.text = 'Unlike';
+        });
+        },
+
+        unfaveItem: function(item) {
+            axios.post('/unfave/' + item.id).then((response) => {
+
+                this.fetchItemData();
+            this.liked = false;
+            this.submitted = false;
+            this.text = 'Like';
+
+        });
+        },
+
+
+        toggleFave: function(item)
+        {
+            if(this.liked) {
+                this.unfaveItem(item)
+            } else {
+                this.faveItem(item)
+            }
         },
 
 
@@ -178,17 +211,6 @@ var app = new Vue({
             this.items = filters.active(this.items)
         },
 
-        faveItem: function(item){
-            axios.post('/fave/'+item.id).then((response) => {
-                this.fetchItemData();
-            });
-        },
-
-        unfaveItem: function(item){
-            axios.post('/unfave/'+item.id).then((response) => {
-                this.fetchItemData();
-        });
-        },
 
     },
 

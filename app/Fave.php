@@ -2,8 +2,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use DB;
-use App\User;
+
+
 
 class Fave extends Model
 {
@@ -11,14 +11,14 @@ class Fave extends Model
 
     protected $fillable = ['user_id','item_id'];
 
-    public function item()
+    public function items()
     {
-        return $this->belongsTo('Item', 'item_id');
+        return $this->belongsTo('\App\Item', 'item_id');
     }
 
 
     public function user()
     {
-        return $this->belongsTo('User', 'user_id')->withTrashed();
+        return $this->belongsTo('\App\User', 'user_id');
     }
 }
