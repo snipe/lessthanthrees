@@ -67,11 +67,11 @@ Route::post(
  * General routes
  */
 Route::get('/tos', function () {
-    return view('welcome');
+    return view('privacy');
 });
 
 Route::get('/privacy', function () {
-    return view('welcome');
+    return view('privacy');
 });
 
 

@@ -206,7 +206,9 @@
                 <div class="col-lg-12">
 
                      <a target="_blank" href="https://lessthanthrees.com">LessThanThrees</a> is an <a href="https://github.com/snipe/lessthanthrees">open source
-                        project</a>. Made with <i class="glyphicon glyphicon-heart heart"></i> by <a href="https://twitter.com/snipeyhead"><i class="fa fa-twitter"></i>snipeyhead</a>. Get updates and support <a href="https://twitter.com/lessthan3sapp"><i class="fa fa-twitter"></i>lessthan3sapp</a>!
+                        project</a>, made with <i class="glyphicon glyphicon-heart heart"></i> by <a href="https://twitter.com/snipeyhead"><i class="fa fa-twitter"></i>snipeyhead</a>. <br>
+                    Get updates and support at <a href="https://twitter.com/lessthan3sapp"><i class="fa fa-twitter"></i>lessthan3sapp</a>! <br>
+                    Read more about how we handle your data at our <a href="{{ config('app.url') }}/privacy">privacy statement</a>.
                 </div>
             </div>
         </div>
