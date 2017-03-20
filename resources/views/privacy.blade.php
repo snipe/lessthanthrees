@@ -24,6 +24,12 @@
                     encrypted TLS connection. We don't even have access to your payment information, just
                     the status of the payment transaction. </p>
 
+                <h2>Who runs LessThanThrees?</h2>
+
+                <p>LessThanThrees is a service provided by Grokability, Inc., creators of such
+                    fine open source products as <a href="https://snipeitapp.com">Snipe-IT Asset Management</a>.
+                    Writing cool software that makes people's lives easier is sort of our jam. </p>
+
                 <div id="vue-wrapper">
                 </div>
             </div>
