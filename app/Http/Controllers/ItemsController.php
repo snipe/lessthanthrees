@@ -119,7 +119,7 @@ class ItemsController extends Controller
             $items_array[$counter]['text'] = 'like';
             
             foreach ($item->faves as $faves) {
-                if ($faves->id == Auth::user()->id) {
+                if (Auth::check() && ($faves->id == Auth::user()->id)) {
                     $items_array[$counter]['liked'] = true;
                     $items_array[$counter]['text'] = 'unlike';
                     break;
