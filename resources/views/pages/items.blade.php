@@ -54,7 +54,6 @@
 
                                         <a
                                         type="submit"
-                                        title="@{{ item.text }}"
                                         class="heart-grey"
                                         v-on:click="toggleFave(item)">
                                             <i class="fa" v-bind:class="[item.liked ? 'fa-heart text-danger' : 'fa-heart-o']"></i>

@@ -57,8 +57,7 @@ var app = new Vue({
         hasError: true,
         hasDeleted: true,
         loading: true,
-        searchString: '',
-        liked: false
+        searchString: ''
     },
 
 
@@ -126,6 +125,7 @@ var app = new Vue({
                 }
                 }).then(response => {
                     _this.items = response.data;
+                    // console.dir(response.data);
                 }).then(() => {
                     //set loading flag to false
                     this.loading = false;
@@ -148,22 +148,17 @@ var app = new Vue({
         },
 
         faveItem: function(item){
-            this.submitted = true;
             axios.post('/fave/' + item.id).then((response) => {
-
                 this.fetchItemData();
             this.liked = true;
-            this.submitted = false;
             this.text = 'Unlike';
         });
         },
 
         unfaveItem: function(item) {
             axios.post('/unfave/' + item.id).then((response) => {
-
                 this.fetchItemData();
             this.liked = false;
-            this.submitted = false;
             this.text = 'Like';
 
         });
@@ -172,11 +167,15 @@ var app = new Vue({
 
         toggleFave: function(item)
         {
-            if(this.liked) {
+            // console.dir(item);
+            // console.log(item.liked);
+            if(item.liked) {
                 this.unfaveItem(item)
             } else {
                 this.faveItem(item)
             }
+            console.log(this.liked);
+
         },
 
 
