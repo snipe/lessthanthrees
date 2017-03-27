@@ -210,7 +210,7 @@
                     Follow <a href="https://twitter.com/lessthan3sapp">@lessthan3sapp</a> for updates.
                 </div>
                 <div class="col-lg-4 col-xs-12 text-right">
-                     <img class="brand" src="{{ url('/') }}/img/logo.png" alt="{{ config('app.name') }}" style="height: 15px;">
+                     <a href="{{ config('app.url') }}"><img src="{{ url('/') }}/img/logo.png" alt="{{ config('app.name') }}" style="height: 15px;"></a>
                 </div>
             </div>
         </div>
