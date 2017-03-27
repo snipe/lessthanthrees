@@ -90,15 +90,14 @@ class LoginController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make(
-            $data,
-            [
-                'email' => 'required|email|max:255|unique:users',
-                'username' => 'required|max:255|unique:users',
-                'password' => 'required|min:6',
-                'password_confirmation' => 'required|same:password',
-            ]
-        );
+
+        $rules = User::rules();
+        $additional_rules = [
+            'password'              => 'required|min:8|confirmed',
+        ];
+        $rules += $additional_rules;
+        return Validator::make($data, $rules);
+
     }
 
     /**
