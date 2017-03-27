@@ -63,6 +63,11 @@ return [
         'amazon' => env('AMAZON_AFFILIATE'),
     ],
 
+    'rollbar' => [
+        'access_token' => env('ROLLBAR_TOKEN'),
+        'client_access_token' => env('ROLLBAR_CLIENT_TOKEN'),
+        'level' => env('ROLLBAR_LEVEL'),
+    ],
 
 
 ];
