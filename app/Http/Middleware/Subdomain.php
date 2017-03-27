@@ -14,7 +14,8 @@ class Subdomain
             view()->share('selected_account',$selected_account);
             return $next($request);
         }
-        return redirect()->route('home');
+        $home = config('app.url');
+        return redirect($home);
 
     }
 
