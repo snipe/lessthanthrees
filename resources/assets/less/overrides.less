@@ -942,6 +942,10 @@ html .clear-completed:active {
 	text-align: center;
 }
 
+.help-block {
+	font-size: 13px;
+}
+
 .info p {
 	line-height: 1;
 }
@@ -1113,3 +1117,73 @@ ul.checkmark li:before {
 .centered-pills a { float:left; }
 * html .centered-pills ul.nav-pills { display:inline; } /* IE6 */
 *+html .centered-pills ul.nav-pills { display:inline; } /* IE7 */
+
+
+/* Required field START */
+
+.required-field-block {
+	position: relative;
+}
+
+
+.required-field-block .required-icon {
+	display: inline-block;
+	vertical-align: middle;
+	margin: -0.25em 0.25em 0em;
+	background-color: #E8E8E8;
+	border-color: #E8E8E8;
+	padding: 0.5em 0.8em;
+	color: rgba(0, 0, 0, 0.65);
+	text-transform: uppercase;
+	font-weight: normal;
+	border-radius: 0.325em;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: background 0.1s linear;
+	-moz-transition: background 0.1s linear;
+	transition: background 0.1s linear;
+	font-size: 75%;
+}
+
+.required-field-block .required-icon {
+	background-color: transparent;
+	position: absolute;
+	top: 0em;
+	right: 1.2em;
+	z-index: 10;
+	margin: 0em;
+	width: 30px;
+	height: 30px;
+	padding: 0em;
+	text-align: center;
+	-webkit-transition: color 0.2s ease;
+	-moz-transition: color 0.2s ease;
+	transition: color 0.2s ease;
+}
+
+.required-field-block .required-icon:after {
+	position: absolute;
+	content: "";
+	right: 1px;
+	top: 1px;
+	z-index: -1;
+	width: 0em;
+	height: 0em;
+	border-top: 0em solid transparent;
+	border-right: 30px solid transparent;
+	border-bottom: 30px solid transparent;
+	border-left: 0em solid transparent;
+	border-right-color: inherit;
+	-webkit-transition: border-color 0.2s ease;
+	-moz-transition: border-color 0.2s ease;
+	transition: border-color 0.2s ease;
+}
+
+.required-field-block .required-icon .text {
+	color: #B80000;
+	font-size: 30px;
+	margin: -5px 0 0 9px;
+}
+/* Required field END */

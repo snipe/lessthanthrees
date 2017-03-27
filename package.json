@@ -16,5 +16,8 @@
     "laravel-mix": "^0.8.3",
     "lodash": "^4.17.4",
     "vue": "^2.1.10"
+  },
+  "dependencies": {
+    "jquery-inputmask": "^1.0.1"
   }
 }

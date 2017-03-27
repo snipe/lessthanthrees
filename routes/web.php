@@ -51,6 +51,8 @@ Route::get('auth/{provider}/callback', [ 'as' => 'oauth.callback', 'uses' => 'Au
 Route::group([ 'prefix' => 'account','middleware' => ['auth']], function () {
 
     Route::get('/', array('as' => 'account.home', 'uses' => 'AccountController@index'));
+    Route::get('/edit', array('as' => 'account.edit', 'uses' => 'AccountController@edit'));
+    Route::post('/edit', array('as' => 'account.save', 'uses' => 'AccountController@update'));
     Route::get('/subscription', array('as' => 'account.subscription', 'uses' => 'AccountController@getSubscription'));
     Route::post('/subscription', array('as' => 'account.subscription.process', 'uses' => 'AccountController@processSubscription'));
     Route::post('/subscription/cancel', array('as' => 'account.subscription.cancel', 'uses' => 'AccountController@processCancellation'));

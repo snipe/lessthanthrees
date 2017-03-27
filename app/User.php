@@ -8,11 +8,35 @@ use Laravel\Cashier\Billable;
 use DB;
 use App\Fave;
 use Auth;
+use Watson\Validating\ValidatingTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use Billable;
+    use ValidatingTrait;
+
+    /**
+     * Model validation rules
+     *
+     * @var array
+     */
+
+    protected $rules = [
+        'name'              => 'required|string|min:1',
+        'username'                => 'required|string|min:2|max:60',
+        'email'                   => 'required|email|max:255',
+    ];
+
+    /**
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var boolean
+     */
+    protected $injectUniqueIdentifier = true;
+
 
     /**
      * The attributes that are mass assignable.
@@ -138,6 +162,16 @@ class User extends Authenticatable
 
     public function isSubscriber() {
         if (Auth::check() && Auth::user()->subscribed('monthly')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function profilePasswordIsRequired($request = null)
+    {
+
+        if ((($request) && ($request->has('password'))) || ($this->password=='')) {
             return true;
         }
 
