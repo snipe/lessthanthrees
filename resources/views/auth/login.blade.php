@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+    <div id="edit-profile">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -69,8 +69,11 @@
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                         <div class="row">
                                         <label for="email" class="col-md-3 control-label col-md-offset-1">E-Mail Address</label>
-                                            <div class="col-md-7">
+                                            <div class="required-field-block  col-md-7">
                                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                                <div class="required-icon">
+                                                    <div class="text">*</div>
+                                                </div>
 
                                                 @if ($errors->has('email'))
                                                     <span class="help-block">
@@ -85,8 +88,11 @@
                                         <div class="row">
                                             <label for="password" class="col-md-3  col-md-offset-1 control-label">Password</label>
 
-                                            <div class="col-md-7">
+                                            <div class="required-field-block col-md-7">
                                                 <input id="password" type="password" class="form-control" name="password" required>
+                                                <div class="required-icon">
+                                                    <div class="text">*</div>
+                                                </div>
                                                 @if ($errors->has('password'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('password') }}</strong>
@@ -130,8 +136,11 @@
                                         <div class="row">
                                             <label for="name" class="col-md-3  col-md-offset-1 control-label">Name</label>
 
-                                            <div class="col-md-7">
+                                            <div class="required-field-block col-md-7">
                                                 <input id="name" type="text" class="form-control" name="name" required>
+                                                <div class="required-icon">
+                                                    <div class="text">*</div>
+                                                </div>
                                                 @if ($errors->has('name'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('name') }}</strong>
@@ -145,13 +154,17 @@
                                         <div class="row">
                                             <label for="username" class="col-md-3  col-md-offset-1 control-label">Username</label>
 
-                                            <div class="col-md-7">
-                                                <input id="username" type="text" class="form-control" name="username" required>
+                                            <div class="required-field-block col-md-7">
+                                                <input id="username" type="text" v-model="username" class="form-control" name="username" required>
+                                                <div class="required-icon">
+                                                    <div class="text">*</div>
+                                                </div>
                                                 @if ($errors->has('username'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('username') }}</strong>
                                                     </span>
                                                 @endif
+                                                <p class="help-block">This field may contain only letters, numbers and dashes, and will be used as your subdomain: https://@{{ username }}.lessthanthrees.com</p>
                                             </div>
                                         </div>
                                     </div>
@@ -159,8 +172,11 @@
                                         <div class="row">
                                             <label for="email" class="col-md-3  col-md-offset-1 control-label">Email</label>
 
-                                            <div class="col-md-7">
+                                            <div class="required-field-block col-md-7">
                                                 <input id="email" type="email" class="form-control" name="email" required>
+                                                <div class="required-icon">
+                                                    <div class="text">*</div>
+                                                </div>
                                                 @if ($errors->has('email'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('email') }}</strong>
@@ -173,8 +189,11 @@
                                         <div class="row">
                                             <label for="password" class="col-md-3  col-md-offset-1 control-label">Password</label>
 
-                                            <div class="col-md-7">
+                                            <div class="required-field-block col-md-7">
                                                 <input id="password" type="password" class="form-control" name="password" required>
+                                                <div class="required-icon">
+                                                    <div class="text">*</div>
+                                                </div>
                                                 @if ($errors->has('password'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('password') }}</strong>
@@ -187,8 +206,11 @@
                                         <div class="row">
                                             <label for="password_confirmation" class="col-md-3  col-md-offset-1 control-label">Confirm Password</label>
 
-                                            <div class="col-md-7">
+                                            <div class="required-field-block col-md-7">
                                                 <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
+                                                <div class="required-icon">
+                                                    <div class="text">*</div>
+                                                </div>
                                                 @if ($errors->has('password_confirmation'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -215,5 +237,24 @@
             </div>
         </div>
     </div>
+    </div>
+@section('moar_scripts')
+    <script>
+        var editProfile = new Vue({
+            el: '#edit-profile',
+            data: {
+                username: 'your-username'
+            }
+        })
 
+        $(function() {
+            $('.required-icon').tooltip({
+                placement: 'left',
+                title: 'Required field'
+            });
+        });
+
+
+    </script>
+@stop
 @endsection
