@@ -52,6 +52,26 @@ class ItemsController extends Controller
         Item::where('id','=',$request->id)->where('user_id','=',Auth::user()->id)->delete();
     }
 
+
+    public function copyItem(Request $request) {
+
+        if ($copying_item = Item::find($request->id)) {
+
+            $item = new Item;
+            $item->name = $copying_item->name;
+            $item->category_id = $copying_item->category_id;
+            $item->user_id = Auth::user()->id;
+            $item->copied_from_id = $copying_item->id;
+            
+            if ($item->save()) {
+                return $item;
+            }
+            return false;
+        }
+        return false;
+    }
+
+
     public function faveItem(Request $request) {
         if ($item = Item::find($request->id)->get()) {
             return Fave::firstOrCreate(
@@ -90,13 +110,15 @@ class ItemsController extends Controller
         if ($category = Category::where('slug','=',$category)->first()) {
             return view('pages/items')->with('category',$category);
         }
-
         return view('pages/items')->with('error','Invalid category');
 
     }
 
     public function showUserItems(Request $request, $subdomain, $category = null) {
 
+        if (!$request->selected_account) {
+            return 'Invalid subdomain/user.';
+        }
         $items_array = array();
         $items = Item::with('category','faves');
 
@@ -112,16 +134,33 @@ class ItemsController extends Controller
 
         $counter = 0;
 
+        if (Auth::check()) {
+            $user_items = Item::select('copied_from_id')->with('category','faves')->where('user_id','=',Auth::user()->id)->get();
+        } else {
+            $user_items = [];
+        }
+       
+
         foreach ($items as $item) {
             $items_array[$counter]['id'] = $item->id;
             $items_array[$counter]['name'] = $item->name;
             $items_array[$counter]['liked'] = false;
             $items_array[$counter]['text'] = 'like';
+            $items_array[$counter]['copied'] = false;
+
             
             foreach ($item->faves as $faves) {
                 if (Auth::check() && ($faves->id == Auth::user()->id)) {
                     $items_array[$counter]['liked'] = true;
                     $items_array[$counter]['text'] = 'unlike';
+                    break;
+                }
+            }
+
+            foreach ($user_items as $user_item) {
+
+                if ($user_item->copied_from_id == $item->id) {
+                    $items_array[$counter]['copied'] = true;
                     break;
                 }
             }
