@@ -47,13 +47,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-
-        $rules = User::rules();
-        $additional_rules = [
-            'password'              => 'required|min:8|confirmed',
-        ];
-        $rules += $additional_rules;
-        return Validator::make($data, $rules);
+        return Validator::make($data,[
+            'name'                    => 'required|string|min:1',
+            'username'                => 'required|string|min:2|max:60|not_in:www,support,admin|unique:users,username',
+            'email'                   => 'required|email|max:255|unique:users,email',
+            'password'                => 'required|min:8|confirmed',
+        ]);
+        
     }
 
     /**
