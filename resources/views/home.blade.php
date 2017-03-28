@@ -48,10 +48,6 @@
                         <p class="text-center alert alert-success"
                            v-bind:class="{ hidden: hasDeleted }">Deleted Successfully!</p>
 
-                        <div class="col-md-12 text-center" v-if="loading" v-cloak>
-                            <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw loading"></i>
-                            <span>Loading...</span>
-                        </div>
 
 
                         <div v-show="items.length" v-cloak>
