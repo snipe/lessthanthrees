@@ -88,6 +88,7 @@
                             <li><a href="{{ config('app.url') }}/home">Add Stuff!</a></li>
                             <li><a href="{{ Auth::user()->getProfileUrl() }}">Public Profile</a></li>
                             <li><a href="{{ config('app.url') }}/account/edit" }}">Edit Profile</a></li>
+                            <li><a href="{{ config('app.url') }}/account/password" }}">Update Password</a></li>
                             <li>
                                 <a href="{{ config('app.url') }}/account/subscription">{{ (Auth::user()->subscribed('monthly')) ? 'Subscription' : 'Upgrade' }}</a></li>
                             <!-- <li><a href="{{ config('app.url') }}/saved">Saved</a></li> -->
