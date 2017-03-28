@@ -53,11 +53,8 @@
                                     @if (Auth::check())
                                     <td>
 
-                                        <a
-                                        type="submit"
-                                        class="heart-grey"
-                                        v-on:click="toggleFave(item)">
-                                            <i class="fa" v-bind:class="[item.liked ? 'fa-heart text-danger' : 'fa-heart-o']"></i>
+                                        <a type="submit" class="heart-grey" data-toggle="tooltip" data-placement="top" title="Save this to your to-do list" v-on:click="toggleFave(item)">
+                                            <i class="fa" v-bind:class="[item.liked ? 'fa-bookmark text-danger' : 'fa-bookmark-o']"></i>
                                         </a>
 
                                     </td>
@@ -75,8 +72,8 @@
                                         @if ((Auth::check()) &&  ($selected_account->id != Auth::user()->id))
                                             <td>
 
-                                                <a type="submit"  class="heart-grey" v-on:click="copyItem(item)">
-                                                    <i class="fa" v-bind:class="[item.copied ? 'fa-check text-danger' : 'fa-copy']"></i>
+                                                <a type="submit" data-toggle="tooltip" data-placement="top" title="Copy this to your own list"  class="heart-grey" v-on:click="copyItem(item)">
+                                                    <i class="fa" v-bind:class="[item.copied ? 'fa-check text-success' : 'fa-copy']"></i>
                                                 </a>
 
                                             </td>
