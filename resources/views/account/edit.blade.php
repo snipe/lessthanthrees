@@ -27,7 +27,7 @@
                                         <div class="row">
                                             <label class="field col-md-3" for="name">Name:</label>
                                             <div class="required-field-block col-md-9">
-                                                <input class="form-control col-md-12" data-name="Name" id="name" maxlength="256" name="name" placeholder="Enter your name" type="text"  value="{{ Auth::user()->name }}" autofocus>
+                                                <input class="form-control col-md-12" data-name="Name" id="name" maxlength="256" name="name" placeholder="Enter your name" type="text"  value="{{ old('name', Auth::user()->name) }}" autofocus>
                                                 <div class="required-icon">
                                                     <div class="text">*</div>
                                                 </div>
@@ -44,7 +44,7 @@
                                         <div class="row">
                                             <label class="field col-md-3" for="username">Username:</label>
                                             <div class="required-field-block col-md-9">
-                                                <input  class="form-control col-md-12" id="email" maxlength="200" name="username" placeholder="your-username" type="text" v-model="username" value="{{ Auth::user()->username }}">
+                                                <input  class="form-control col-md-12" id="email" maxlength="200" name="username" placeholder="your-username" type="text" v-model="username" value="{{ old('username', Auth::user()->username) }}">
                                                 <div class="required-icon">
                                                     <div class="text">*</div>
                                                 </div>
@@ -62,7 +62,7 @@
                                         <div class="row">
                                             <label class="field col-md-3" for="email">Email Address:</label>
                                             <div class="required-field-block col-md-9">
-                                                <input  class="form-control col-md-12" data-name="Email" id="email" maxlength="256" name="email" placeholder="Enter your email address" type="email" value="{{ Auth::user()->email }}" required>
+                                                <input  class="form-control col-md-12" data-name="Email" id="email" maxlength="256" name="email" placeholder="Enter your email address" type="email" value="{{ old('email', Auth::user()->email) }}" required>
                                                 <div class="required-icon">
                                                     <div class="text">*</div>
                                                 </div>
@@ -144,7 +144,7 @@
         var editProfile = new Vue({
             el: '#edit-profile',
             data: {
-                username: '{{ ( Auth::user()->username!='') ? Auth::user()->username : str_slug(Auth::user()->name) }}'
+                username: '{{ ( Auth::user()->username!='') ? old('username', Auth::user()->username) : str_slug(Auth::user()->name) }}'
             }
         })
 
