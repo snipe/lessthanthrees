@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Http\Requests\UserUpdate;
+use App\Http\Requests\UserPassword;
 
 class AccountController extends Controller
 {
@@ -18,25 +20,13 @@ class AccountController extends Controller
         return view('account.edit');
     }
 
-    public function update(Request $request)
+    public function update(UserUpdate $request)
     {
 
 
         if ($user = User::find(Auth::user()->id)) {
 
-            $rules = User::rules();
 
-            // Only require the password if the user has not set one, or if they
-            // entered a value as if to change it
-            if ($user->profilePasswordIsRequired($request)) {
-                $additional_rules = [
-                    'password'              => 'required|min:8|confirmed',
-                ];
-                $rules += $additional_rules;
-                $user->password = bcrypt($request->get('password'));
-            }
-
-            $this->validate($request, $rules);
             $user->username = strtolower(str_slug($request->get('username')));
             $user->name = $request->get('name');
             $user->email = $request->get('email');
@@ -51,6 +41,33 @@ class AccountController extends Controller
         }
 
     }
+
+
+
+    public function editPassword()
+    {
+        return view('account.password');
+    }
+
+    public function updatePassword(UserPassword $request)
+    {
+
+
+        if ($user = User::find(Auth::user()->id)) {
+
+            $user->password = bcrypt($request->get('password'));
+
+            if ($user->save()) {
+                return back()->with('success','Password updated!');
+            }
+            return back()->withErrors($user->getErrors());
+
+        } else {
+            return back()->with('error','User does not exist.');
+        }
+
+    }
+
 
 
     public function getSubscription()
