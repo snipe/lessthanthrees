@@ -76,49 +76,6 @@
                                     </div>
 
 
-                                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                        <div class="row">
-                                            <label class="field col-md-3" for="password">{{ Auth::user()->password=='' ? 'Create ' : 'Update' }} Password:</label>
-                                            <div class="{{ Auth::user()->profilePasswordIsRequired() ? 'required-field-block ' : '' }}col-md-9">
-                                                <input  class="form-control col-md-12" id="password" maxlength="60" name="password" type="password">
-                                                @if (Auth::user()->profilePasswordIsRequired())
-                                                    <div class="required-icon">
-                                                        <div class="text">*</div>
-                                                    </div>
-                                                @endif
-
-                                                @if ($errors->has('password'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('password') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                        <div class="row">
-                                            <label class="field col-md-3" for="password_confirmation">Password Confirmation:</label>
-                                            <div class="{{ Auth::user()->profilePasswordIsRequired() ? 'required-field-block ' : '' }}col-md-9">
-                                                <input  class="form-control col-md-12" maxlength="60" name="password_confirmation" type="password">
-
-                                                @if (Auth::user()->profilePasswordIsRequired())
-
-                                                    <div class="required-icon">
-                                                        <div class="text">*</div>
-                                                    </div>
-
-                                                @endif
-                                                @if ($errors->has('password_confirmation'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-
-
 
 
                                     <div class="form-group col-md-offset-3">
