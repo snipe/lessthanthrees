@@ -31,7 +31,7 @@ Route::group([
 });
 
 
-
+Route::post('/copy/{id}', array('as' => 'item.copy', 'uses' => 'ItemsController@copyItem'));
 Route::post('/fave/{id}', array('as' => 'item.fave', 'uses' => 'ItemsController@faveItem'));
 Route::post('/unfave/{id}', array('as' => 'item.unfave', 'uses' => 'ItemsController@unfaveItem'));
 Route::get('/saved', array('as' => 'user.faved', 'uses' => 'ItemsController@showUserFavesPage'));
