@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -71,13 +72,10 @@
                                         @endif
                                     <td>@{{ item.description }}</td>
 
-                                        @if (Auth::check())
+                                        @if ((Auth::check()) &&  ($selected_account->id != Auth::user()->id))
                                             <td>
 
-                                                <a
-                                                        type="submit"
-                                                        class="heart-grey"
-                                                        v-on:click="copyItem(item)">
+                                                <a type="submit"  class="heart-grey" v-on:click="copyItem(item)">
                                                     <i class="fa" v-bind:class="[item.copied ? 'fa-check text-danger' : 'fa-copy']"></i>
                                                 </a>
 
