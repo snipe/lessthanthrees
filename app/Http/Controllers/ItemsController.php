@@ -135,7 +135,7 @@ class ItemsController extends Controller
         $counter = 0;
 
         if (Auth::check()) {
-            $user_items = Item::select('copied_from_id')->with('category','faves')->where('user_id','=',Auth::user()->id)->get();
+            $user_items = Item::select('name', 'category_id', 'copied_from_id')->with('category','faves')->where('user_id','=',Auth::user()->id)->get();
         } else {
             $user_items = [];
         }
@@ -159,7 +159,7 @@ class ItemsController extends Controller
 
             foreach ($user_items as $user_item) {
 
-                if ($user_item->copied_from_id == $item->id) {
+                if (($user_item->copied_from_id == $item->id) || (($user_item->name == $item->name) && ($user_item->category_id == $item->category_id))) {
                     $items_array[$counter]['copied'] = true;
                     break;
                 }
