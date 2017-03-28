@@ -57,7 +57,8 @@ var app = new Vue({
         hasError: true,
         hasDeleted: true,
         loading: true,
-        searchString: ''
+        searchString: '',
+        genreFilterKey: 'all'
     },
 
 
@@ -71,14 +72,14 @@ var app = new Vue({
             var items_array = this.items,
                 searchString = this.searchString;
 
-            // console.dir(this.items);
-            // console.dir(searchString);
 
-            if (!searchString){
+            // Show the full list
+            if ((!searchString) && ((!genreFilterKey)) || (genreFilterKey=='')) {
                 return items_array;
             }
 
             searchString = searchString.trim().toLowerCase();
+            genreFilterKey = genreFilterKey.trim().toLowerCase();
 
             items_array = items_array.filter(function(item) {
                 if(item.name.toLowerCase().indexOf(searchString) !== -1){
@@ -146,6 +147,16 @@ var app = new Vue({
             });
             }
         },
+
+        copyItem: function(item){
+            axios.post('/copy/' + item.id).then((response) => {
+                this.fetchItemData();
+            this.copied = true;
+            this.copy_text = 'Copied';
+        });
+        },
+
+
 
         faveItem: function(item){
             axios.post('/fave/' + item.id).then((response) => {
