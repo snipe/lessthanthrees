@@ -71,6 +71,21 @@
                                         @endif
                                     <td>@{{ item.description }}</td>
 
+                                        @if (Auth::check())
+                                            <td>
+
+                                                <a
+                                                        type="submit"
+                                                        class="heart-grey"
+                                                        v-on:click="copyItem(item)">
+                                                    <i class="fa" v-bind:class="[item.copied ? 'fa-check text-danger' : 'fa-copy']"></i>
+                                                </a>
+
+                                            </td>
+                                        @endif
+
+
+
                                 </tr>
                             </table>
                         </div>
