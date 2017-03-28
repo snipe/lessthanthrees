@@ -5,37 +5,14 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Cashier\Billable;
-use DB;
-use App\Fave;
 use Auth;
-use Watson\Validating\ValidatingTrait;
+
 
 class User extends Authenticatable
 {
     use Notifiable;
     use Billable;
-    use ValidatingTrait;
 
-    /**
-     * Model validation rules
-     *
-     * @var array
-     */
-
-    protected $rules = [
-        'name'              => 'required|string|min:1',
-        'username'                => 'required|string|min:2|max:60|not_in:www,support,admin|unique:users',
-        'email'                   => 'required|email|max:255|unique:users',
-    ];
-
-    /**
-     * Whether the model should inject it's identifier to the unique
-     * validation rules before attempting validation. If this property
-     * is not set in the model it will default to true.
-     *
-     * @var boolean
-     */
-    protected $injectUniqueIdentifier = true;
 
 
     /**
@@ -57,7 +34,7 @@ class User extends Authenticatable
     ];
 
     public function items() {
-        return $this->hasMany('\App\Item');
+        return $this->hasMany(Item::class);
     }
 
     /**
