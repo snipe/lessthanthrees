@@ -245,7 +245,7 @@
             captureUncaught: true,
             captureUnhandledRejections: true,
             payload: {
-                environment: "{{ $this->app->environment() }}"
+                environment: "{{ App::environment() }}"
             }
         };
         // Rollbar Snippet
