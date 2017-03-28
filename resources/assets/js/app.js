@@ -58,7 +58,8 @@ var app = new Vue({
         hasDeleted: true,
         loading: true,
         searchString: '',
-        genreFilterKey: 'all'
+        genreFilterKey: 'all',
+        copied: null
     },
 
 
@@ -71,6 +72,7 @@ var app = new Vue({
         filteredItems: function () {
             var items_array = this.items,
                 searchString = this.searchString;
+                genreFilterKey = this.genreFilterKey;
 
 
             // Show the full list
@@ -91,9 +93,7 @@ var app = new Vue({
             return items_array;
         },
         
-        // filteredItems: function () {
-        //     return filters[this.visibility](this.items)
-        // },
+
         remaining: function () {
             return filters.active(this.items).length
         },
@@ -152,7 +152,7 @@ var app = new Vue({
             axios.post('/copy/' + item.id).then((response) => {
                 this.fetchItemData();
             this.copied = true;
-            this.copy_text = 'Copied';
+            console.log(this.copied);
         });
         },
 
@@ -178,14 +178,11 @@ var app = new Vue({
 
         toggleFave: function(item)
         {
-            // console.dir(item);
-            // console.log(item.liked);
             if(item.liked) {
                 this.unfaveItem(item)
             } else {
                 this.faveItem(item)
             }
-            console.log(this.liked);
 
         },
 
@@ -239,18 +236,18 @@ var app = new Vue({
 
 
 // handle routing
-function onHashChange () {
-    var visibility = window.location.hash.replace(/#\/?/, '')
-    if (filters[visibility]) {
-        app.visibility = visibility
-    } else {
-        window.location.hash = ''
-        app.visibility = 'all'
-    }
-}
+// function onHashChange () {
+//     var visibility = window.location.hash.replace(/#\/?/, '')
+//     if (filters[visibility]) {
+//         app.visibility = visibility
+//     } else {
+//         window.location.hash = ''
+//         app.visibility = 'all'
+//     }
+//}
 
-window.addEventListener('hashchange', onHashChange)
-onHashChange()
+// window.addEventListener('hashchange', onHashChange)
+// onHashChange()
 
 
 $(function() {
@@ -274,5 +271,9 @@ $(function() {
 
 });
 
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});
 
 
