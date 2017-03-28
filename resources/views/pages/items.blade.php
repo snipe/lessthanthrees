@@ -44,7 +44,7 @@
 
                                     <th class="col-md-3">Name</th>
                                         @if (!isset($category))
-                                        <th>Category</th>
+                                            <th>Category</th>
                                         @endif
                                     <th class="col-md-7">Notes</th>
                                 </tr>
@@ -53,9 +53,12 @@
                                     @if (Auth::check())
                                     <td>
 
-                                        <a type="submit" class="heart-grey" data-toggle="tooltip" data-placement="top" title="Save this to your to-do list" v-on:click="toggleFave(item)">
-                                            <i class="fa" v-bind:class="[item.liked ? 'fa-bookmark text-danger' : 'fa-bookmark-o']"></i>
+                                        <a class="heart-grey" data-toggle="tooltip" data-placement="top" title="Save this to your to-do list" @click="toggleFave(item)">
+                                            <transition name="fade" mode="out-in">
+                                                <i v-bind:key="item.liked" class="fa" v-bind:class="[item.liked ? 'fa-bookmark text-danger' : 'fa-bookmark-o']"></i>
+                                            </transition>
                                         </a>
+
 
                                     </td>
                                     @endif
@@ -72,9 +75,13 @@
                                         @if ((Auth::check()) &&  ($selected_account->id != Auth::user()->id))
                                             <td>
 
-                                                <a type="submit" data-toggle="tooltip" data-placement="top" title="Copy this to your own list"  class="heart-grey" v-on:click="copyItem(item)">
-                                                    <i class="fa" v-bind:class="[item.copied ? 'fa-check text-success' : 'fa-copy']"></i>
+                                                <a class="heart-grey" data-toggle="tooltip" data-placement="top" title="Copy this to your own list" @click="copyItem(item)">
+                                                <transition name="fade" mode="out-in">
+                                                    <i v-bind:key="item.copied" class="fa" v-bind:class="[item.copied ? 'fa-check text-success' : 'fa-copy heart-grey']"></i>
+                                                </transition>
                                                 </a>
+
+
 
                                             </td>
                                         @endif
