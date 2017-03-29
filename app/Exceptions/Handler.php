@@ -15,7 +15,6 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         \Illuminate\Auth\AuthenticationException::class,
-        \Illuminate\Auth\Access\AuthorizationException::class,
         \Symfony\Component\HttpKernel\Exception\HttpException::class,
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
@@ -30,10 +29,12 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Exception $e)
     {
-        \Log::error($exception);
-         parent::report($exception);
+        if ($this->shouldReport($e)) {
+            \Log::error($e);
+            return parent::report($e);
+        }
     }
 
     /**
