@@ -33,8 +33,11 @@ class ItemsController extends Controller
 
 
     public function readItems() {
-        $items = Item::with('category')
-            ->where('user_id','=',Auth::user()->id)->orderBy('items.created_at','DESC')->get();
+        $items = Item::with('category');
+        if (Auth::check()) {
+            $items = $items->where('user_id','=',Auth::user()->id);
+        }
+        $items = $items->orderBy('items.created_at','DESC')->get();
         return $items;
     }
 
